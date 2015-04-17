@@ -15,6 +15,11 @@ import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Minimal URI builder.
+ * 
+ * @author moznion
+ */
 public class TinyURIBuilder {
   @Getter
   private String scheme;
@@ -316,7 +321,6 @@ public class TinyURIBuilder {
 
     uriString = CONSECUTIVE_SLASHES_RE.matcher(uriString).replaceAll("/"); // Squash consecutive
                                                                            // slashes
-
-    return new URI(uriStringBuilder.toString());
+    return new URI(uriString);
   }
 }
