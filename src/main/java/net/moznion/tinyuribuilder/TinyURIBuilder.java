@@ -273,10 +273,6 @@ public class TinyURIBuilder {
   public URI build() throws URISyntaxException {
     StringBuilder uriStringBuilder = new StringBuilder();
 
-    if (!scheme.isEmpty()) {
-      uriStringBuilder.append(scheme).append("://");
-    }
-
     boolean shouldAppendTrailingSlash = false;
     if (!host.isEmpty()) {
       uriStringBuilder.append(host);
@@ -321,6 +317,10 @@ public class TinyURIBuilder {
 
     uriString = CONSECUTIVE_SLASHES_RE.matcher(uriString).replaceAll("/"); // Squash consecutive
                                                                            // slashes
+    if (!scheme.isEmpty()) {
+      uriString = scheme + "://" + uriString;
+    }
+
     return new URI(uriString);
   }
 }
