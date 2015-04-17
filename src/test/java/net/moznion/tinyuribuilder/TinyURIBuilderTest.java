@@ -1,0 +1,55 @@
+package net.moznion.tinyuribuilder;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class TinyURIBuilderTest {
+	@Test
+	public void shouldGetURIInstanceByManual() throws URISyntaxException {
+		Map<String, String> queryParameters = new HashMap<>();
+		queryParameters.put("hoge", "fuga");
+
+		URI got = new TinyURIBuilder()
+			.setSchema("https")
+			.setHost("java.example.com")
+			.setPort(8080)
+			.setPaths(Arrays.asList("foo", "bar"))
+			.appendPaths(Arrays.asList("buz", "qux"))
+			.setQueryParameters(queryParameters)
+			.addQueryParameter("piyo", "hogera")
+			.setFragment("frag")
+			.build();
+		assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag", got.toString());
+	}
+
+	@Test
+	public void shouldGetURIInstanceByStringInitialValue() throws URISyntaxException {
+		URI got = new TinyURIBuilder("https://java.example.com/foo/bar")
+			.setPort(8080)
+			.appendPaths("/buz/qux")
+			.addQueryParameter("hoge", "fuga")
+			.addQueryParameter("piyo", "hogera")
+			.setFragment("frag")
+			.build();
+		assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag", got.toString());
+	}
+
+	@Test
+	public void shouldGetURIInstanceByURIInitialValue() throws URISyntaxException {
+		URI got = new TinyURIBuilder(new URI("https://java.example.com/foo/bar"))
+			.setPort(8080)
+			.appendPaths("/buz/qux")
+			.addQueryParameter("hoge", "fuga")
+			.addQueryParameter("piyo", "hogera")
+			.setFragment("frag")
+			.build();
+		assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag", got.toString());
+	}
+}
