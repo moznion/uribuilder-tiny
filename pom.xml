@@ -8,8 +8,8 @@
 	<packaging>jar</packaging>
 
 	<name>tiny-uribuilder</name>
-	<description></description>
-	<url></url>
+	<description>Minimal URI Builder for Java 8</description>
+	<url>https://github.com/moznion/tiny-uribuilder</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -211,9 +211,9 @@
 	</distributionManagement>
 
 	<scm>
-		<url></url>
-		<connection>scm:git:</connection>
-		<developerConnection>scm:git:</developerConnection>
+		<url>https://github.com/moznion/tiny-uribuilder</url>
+		<connection>scm:git:git@github.com:moznion/tiny-uribuilder.git</connection>
+		<developerConnection>scm:git:git@github.com:moznion/tiny-uribuilder.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
