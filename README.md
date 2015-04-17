@@ -1,12 +1,52 @@
 tiny-uribuilder
 =============
 
-TBD
+Minimal URI builder.
 
 Synopsis
 ---
 
-TBD
+### Manually use
+
+```java
+Map<String, String> queryParameters = new HashMap<>();
+queryParameters.put("hoge", "fuga");
+
+new TinyURIBuilder()
+	.setSchema("https")
+	.setHost("java.example.com")
+	.setPort(8080)
+	.setPaths(Arrays.asList("foo", "bar"))
+	.appendPaths(Arrays.asList("buz", "qux"))
+	.setQueryParameters(queryParameters)
+	.addQueryParameter("piyo", "hogera")
+	.setFragment("frag")
+	.build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
+```
+
+### With URI string as initial value
+
+```java
+new TinyURIBuilder("https://java.example.com/foo/bar")
+	.setPort(8080)
+	.appendPaths("/buz/qux")
+	.addQueryParameter("hoge", "fuga")
+	.addQueryParameter("piyo", "hogera")
+	.setFragment("frag")
+	.build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
+```
+
+### With URI instance as initial value
+
+```java
+new TinyURIBuilder(new URI("https://java.example.com/foo/bar"))
+	.setPort(8080)
+	.appendPaths("/buz/qux")
+	.addQueryParameter("hoge", "fuga")
+	.addQueryParameter("piyo", "hogera")
+	.setFragment("frag")
+	.build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
+```
 
 Description
 --
