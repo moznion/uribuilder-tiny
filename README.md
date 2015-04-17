@@ -1,4 +1,4 @@
-tiny-uribuilder
+tiny-uribuilder [![Build Status](https://travis-ci.org/moznion/tiny-uribuilder.svg)](https://travis-ci.org/moznion/tiny-uribuilder)
 =============
 
 Minimal URI builder.
