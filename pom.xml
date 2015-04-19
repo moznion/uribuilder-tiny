@@ -3,7 +3,7 @@
 
 	<groupId>net.moznion</groupId>
 	<artifactId>tiny-uribuilder</artifactId>
-  <version>1.1.1-SNAPSHOT</version>
+  <version>1.2.0</version>
 	<packaging>jar</packaging>
 
 	<name>tiny-uribuilder</name>
@@ -232,7 +232,7 @@
 		<url>https://github.com/moznion/tiny-uribuilder</url>
 		<connection>scm:git:git@github.com:moznion/tiny-uribuilder.git</connection>
 		<developerConnection>scm:git:git@github.com:moznion/tiny-uribuilder.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>tiny-uribuilder-1.2.0</tag>
 	</scm>
 
 	<licenses>
