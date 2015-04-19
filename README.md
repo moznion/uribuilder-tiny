@@ -1,4 +1,4 @@
-tiny-uribuilder [![Build Status](https://travis-ci.org/moznion/tiny-uribuilder.svg)](https://travis-ci.org/moznion/tiny-uribuilder) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.moznion/tiny-uribuilder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.moznion/tiny-uribuilder) [![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder)
+tiny-uribuilder [![Build Status](https://travis-ci.org/moznion/tiny-uribuilder.svg)](https://travis-ci.org/moznion/tiny-uribuilder) [![Coverage Status](https://coveralls.io/repos/moznion/tiny-uribuilder/badge.svg)](https://coveralls.io/r/moznion/tiny-uribuilder) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.moznion/tiny-uribuilder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.moznion/tiny-uribuilder) [![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder)
 =============
 
 Minimal URI builder.
