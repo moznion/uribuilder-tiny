@@ -120,7 +120,17 @@ public class TinyURIBuilder {
    * @return
    */
   public TinyURIBuilder setHost(@NonNull String host) {
+    boolean isTrailingSlash = false;
+    final int hostLength = host.length();
+    if (host.substring(hostLength - 1).equals("/")) { // is last character slash?
+      host = host.substring(0, hostLength - 1);
+      isTrailingSlash = true;
+    }
+
     this.host = urlEncoder.encode(host);
+    if (isTrailingSlash) {
+      this.host += "/";
+    }
     return this;
   }
 
@@ -181,6 +191,22 @@ public class TinyURIBuilder {
   }
 
   /**
+   * Set a query parameter.
+   * 
+   * Replace current query parameter with argument. This method applies percent-encoding to a query
+   * parameter automatically.
+   * 
+   * @param key
+   * @param value
+   * @return
+   */
+  public TinyURIBuilder setQueryParameter(@NonNull String key, @NonNull String value) {
+    this.queryParameters.clear();
+    this.queryParameters.put(urlEncoder.encode(key), urlEncoder.encode(value));
+    return this;
+  }
+
+  /**
    * Add query parameters.
    * 
    * This method applies percent-encoding to query parameters automatically.
@@ -194,7 +220,7 @@ public class TinyURIBuilder {
   }
 
   /**
-   * Add a query parameters.
+   * Add a query parameter.
    * 
    * This method applies percent-encoding to a query parameter automatically.
    * 

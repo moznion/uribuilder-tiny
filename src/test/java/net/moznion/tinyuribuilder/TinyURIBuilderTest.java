@@ -95,4 +95,41 @@ public class TinyURIBuilderTest {
         .build();
     assertEquals("http://java.example.com", got.toString());
   }
+
+  @Test
+  public void testSetAndAddQueryParamWithStringPair() throws URISyntaxException {
+    URI got = new TinyURIBuilder()
+        .setSchema("http")
+        .setHost("java.example.com")
+        .setQueryParameter("hoge", "fuga")
+        .addQueryParameter("piyo", "piyopiyo")
+        .build();
+    assertEquals("http://java.example.com?hoge=fuga&piyo=piyopiyo", got.toString());
+  }
+
+  @Test
+  public void testSetAndAddQueryParamsWithMap() throws URISyntaxException {
+    Map<String, String> initQueryParameters = new HashMap<>();
+    initQueryParameters.put("hoge", "fuga");
+
+    Map<String, String> queryParameters = new HashMap<>();
+    queryParameters.put("piyo", "piyopiyo");
+
+    URI got = new TinyURIBuilder()
+        .setSchema("http")
+        .setHost("java.example.com")
+        .setQueryParameters(initQueryParameters)
+        .addQueryParameters(queryParameters)
+        .build();
+    assertEquals("http://java.example.com?hoge=fuga&piyo=piyopiyo", got.toString());
+  }
+
+  @Test
+  public void testForTrailingSlash() throws URISyntaxException {
+    URI got = new TinyURIBuilder()
+        .setSchema("http")
+        .setHost("java.example.com/")
+        .build();
+    assertEquals("http://java.example.com/", got.toString());
+  }
 }
