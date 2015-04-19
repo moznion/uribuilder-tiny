@@ -13,7 +13,7 @@ Map<String, String> queryParameters = new HashMap<>();
 queryParameters.put("hoge", "fuga");
 
 new TinyURIBuilder()
-	.setSchema("https")
+	.setScheme("https")
 	.setHost("java.example.com")
 	.setPort(8080)
 	.setPaths(Arrays.asList("foo", "bar"))

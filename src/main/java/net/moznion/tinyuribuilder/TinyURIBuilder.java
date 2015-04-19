@@ -84,13 +84,13 @@ public class TinyURIBuilder {
 
     paths = new ArrayList<>();
     String pathString = uri.getPath();
-    if (pathString != null) {
+    if (pathString != null && !pathString.isEmpty()) {
       paths.addAll(Arrays.asList(pathString.split("/")));
     }
 
     queryParameters = new TreeMap<>();
     String queryString = uri.getQuery();
-    if (queryString != null) {
+    if (queryString != null && !queryString.isEmpty()) {
       queryParameters.putAll(Arrays.stream(queryString.split("&"))
           .map(term -> term.split("="))
           .filter(keyValue -> keyValue.length == 2)
@@ -101,13 +101,13 @@ public class TinyURIBuilder {
   }
 
   /**
-   * Set a schema.
+   * Set a scheme.
    * 
-   * @param schema
+   * @param scheme
    * @return
    */
-  public TinyURIBuilder setSchema(@NonNull String schema) {
-    this.scheme = schema;
+  public TinyURIBuilder setScheme(@NonNull String scheme) {
+    this.scheme = scheme;
     return this;
   }
 
@@ -259,18 +259,22 @@ public class TinyURIBuilder {
 
     boolean shouldAppendTrailingSlash = false;
     if (!host.isEmpty()) {
-      uriStringBuilder.append(host);
-
       if (host.substring(host.length() - 1).equals("/")) { // is last character slash?
         shouldAppendTrailingSlash = true;
+        host = host.substring(0, host.length() - 1);
       }
+      uriStringBuilder.append(host);
     }
 
     if (port >= 0) {
       uriStringBuilder.append(":").append(port);
     }
 
-    if (!paths.isEmpty()) {
+    if (paths.isEmpty()) {
+      if (shouldAppendTrailingSlash) {
+        uriStringBuilder.append("/");
+      }
+    } else {
       for (String path : paths) {
         if (!path.isEmpty()) {
           uriStringBuilder.append("/").append(path);
