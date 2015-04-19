@@ -1,4 +1,4 @@
-tiny-uribuilder [![Build Status](https://travis-ci.org/moznion/tiny-uribuilder.svg)](https://travis-ci.org/moznion/tiny-uribuilder)
+tiny-uribuilder [![Build Status](https://travis-ci.org/moznion/tiny-uribuilder.svg)](https://travis-ci.org/moznion/tiny-uribuilder) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.moznion/tiny-uribuilder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.moznion/tiny-uribuilder) [![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder)
 =============
 
 Minimal URI builder.
@@ -51,7 +51,22 @@ new TinyURIBuilder(new URI("https://java.example.com/foo/bar"))
 Description
 --
 
-TBD
+tiny-uribuilder is a minimal URI builder.
+
+[URIBuilder](https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/utils/URIBuilder.html)
+of [Apache HttpClient](https://hc.apache.org/httpcomponents-client-ga/) is a similar library.
+It is a major and useful library. But it has lots of methods that are not much needed,
+lacked some convenient methods (e.g. `appendPaths`) and it is a component of HttpClient so we cannot use it independently.
+
+So I implement tiny-uribuilder to solve these frustration.
+This library is minimal and independent from any others.
+
+Methods
+==
+
+Please see javadoc.
+
+[![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder)
 
 Author
 --
@@ -63,7 +78,7 @@ License
 
 ```
 The MIT License (MIT)
-Copyright © 2014 moznion, http://moznion.net/ <moznion@gmail.com>
+Copyright © 2015 moznion, http://moznion.net/ <moznion@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
