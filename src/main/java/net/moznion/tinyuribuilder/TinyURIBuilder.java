@@ -153,21 +153,6 @@ public class TinyURIBuilder {
   }
 
   /**
-   * Set paths by string.
-   * 
-   * It splits paths string by "/" and replace paths with them. This method applies percent-encoding
-   * to paths automatically.
-   * 
-   * @param paths
-   * @return
-   */
-  public TinyURIBuilder setPaths(@NonNull String paths) {
-    this.paths.clear();
-    this.paths.addAll(urlEncoder.encode(Arrays.asList(paths.split("/"))));
-    return this;
-  }
-
-  /**
    * Append paths to current paths.
    * 
    * This method applies percent-encoding to paths automatically.
@@ -177,33 +162,6 @@ public class TinyURIBuilder {
    */
   public TinyURIBuilder appendPaths(@NonNull List<String> paths) {
     this.paths.addAll(urlEncoder.encode(paths));
-    return this;
-  }
-
-  /**
-   * Append paths to current paths.
-   * 
-   * It splits paths string by "/" and append them to current paths. This method applies
-   * percent-encoding to paths automatically.
-   * 
-   * @param paths
-   * @return
-   */
-  public TinyURIBuilder appendPaths(@NonNull String paths) {
-    this.paths.addAll(urlEncoder.encode(Arrays.asList(paths.split("/"))));
-    return this;
-  }
-
-  /**
-   * Append a path to current paths.
-   * 
-   * This method applies percent-encoding to a path automatically.
-   * 
-   * @param path
-   * @return
-   */
-  public TinyURIBuilder appendPath(@NonNull String path) {
-    this.paths.add(urlEncoder.encode(path));
     return this;
   }
 

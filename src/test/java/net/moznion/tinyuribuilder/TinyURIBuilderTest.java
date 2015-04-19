@@ -34,7 +34,7 @@ public class TinyURIBuilderTest {
   public void shouldGetURIInstanceByStringInitialValue() throws URISyntaxException {
     URI got = new TinyURIBuilder("https://java.example.com/foo/bar")
         .setPort(8080)
-        .appendPaths("/buz/qux")
+        .appendPaths(Arrays.asList("buz", "qux"))
         .addQueryParameter("hoge", "fuga")
         .addQueryParameter("piyo", "hogera")
         .setFragment("frag")
@@ -47,12 +47,52 @@ public class TinyURIBuilderTest {
   public void shouldGetURIInstanceByURIInitialValue() throws URISyntaxException {
     URI got = new TinyURIBuilder(new URI("https://java.example.com/foo/bar"))
         .setPort(8080)
-        .appendPaths("/buz/qux")
+        .appendPaths(Arrays.asList("buz", "qux"))
         .addQueryParameter("hoge", "fuga")
         .addQueryParameter("piyo", "hogera")
         .setFragment("frag")
         .build();
     assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag",
         got.toString());
+  }
+
+  @Test
+  public void shouldGetURIInstanceWithEmptyURI() throws URISyntaxException {
+    Map<String, String> queryParameters = new HashMap<>();
+    queryParameters.put("hoge", "fuga");
+
+    URI got = new TinyURIBuilder(new URI(""))
+        .setSchema("https")
+        .setHost("java.example.com")
+        .setPort(8080)
+        .setPaths(Arrays.asList("foo", "bar"))
+        .appendPaths(Arrays.asList("buz", "qux"))
+        .setQueryParameters(queryParameters)
+        .addQueryParameter("piyo", "hogera")
+        .setFragment("frag")
+        .build();
+    assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag",
+        got.toString());
+  }
+
+  @Test
+  public void testSetByStringy() throws URISyntaxException {
+    URI got = new TinyURIBuilder()
+        .setSchema("http")
+        .setHost("java.example.com")
+        .setPort(8080)
+        .setPaths(Arrays.asList("foo", "bar"))
+        .appendPaths(Arrays.asList("buz", "qux"))
+        .build();
+    assertEquals("http://java.example.com:8080/foo/bar/buz/qux", got.toString());
+  }
+
+  @Test
+  public void testEmptyPort() throws URISyntaxException {
+    URI got = new TinyURIBuilder()
+        .setSchema("http")
+        .setHost("java.example.com")
+        .build();
+    assertEquals("http://java.example.com", got.toString());
   }
 }
