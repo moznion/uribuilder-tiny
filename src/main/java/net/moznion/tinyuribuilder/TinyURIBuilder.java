@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 /**
  * Minimal URI builder.
  * 
+ * @deprecated Please use {@link URIBuilderTiny}
  * @author moznion
  */
 public class TinyURIBuilder {
