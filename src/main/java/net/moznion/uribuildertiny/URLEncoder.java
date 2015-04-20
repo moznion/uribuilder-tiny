@@ -1,4 +1,4 @@
-package net.moznion.tinyuribuilder;
+package net.moznion.uribuildertiny;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;

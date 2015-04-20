@@ -2,13 +2,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.moznion</groupId>
-	<artifactId>tiny-uribuilder</artifactId>
-  <version>1.2.2-SNAPSHOT</version>
+	<artifactId>uribuilder-tiny</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>tiny-uribuilder</name>
+	<name>uribuilder-tiny</name>
 	<description>Minimal URI Builder for Java 8</description>
-	<url>https://github.com/moznion/tiny-uribuilder</url>
+	<url>https://github.com/moznion/uribuilder-tiny</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -232,9 +232,9 @@
 	</distributionManagement>
 
 	<scm>
-		<url>https://github.com/moznion/tiny-uribuilder</url>
-		<connection>scm:git:git@github.com:moznion/tiny-uribuilder.git</connection>
-		<developerConnection>scm:git:git@github.com:moznion/tiny-uribuilder.git</developerConnection>
+		<url>https://github.com/moznion/uribuilder-tiny</url>
+		<connection>scm:git:git@github.com:moznion/uribuilder-tiny.git</connection>
+		<developerConnection>scm:git:git@github.com:moznion/uribuilder-tiny.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 

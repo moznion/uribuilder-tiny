@@ -1,4 +1,4 @@
-tiny-uribuilder [![Build Status](https://travis-ci.org/moznion/tiny-uribuilder.svg)](https://travis-ci.org/moznion/tiny-uribuilder) [![Coverage Status](https://coveralls.io/repos/moznion/tiny-uribuilder/badge.svg)](https://coveralls.io/r/moznion/tiny-uribuilder) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.moznion/tiny-uribuilder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.moznion/tiny-uribuilder) [![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder)
+uribuilder-tiny [![Build Status](https://travis-ci.org/moznion/uribuilder-tiny.svg)](https://travis-ci.org/moznion/uribuilder-tiny) [![Coverage Status](https://coveralls.io/repos/moznion/uribuilder-tiny/badge.svg)](https://coveralls.io/r/moznion/uribuilder-tiny) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.moznion/uribuilder-tiny/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.moznion/uribuilder-tiny) [![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny)
 =============
 
 Minimal URI builder.
@@ -12,7 +12,7 @@ Synopsis
 Map<String, String> queryParameters = new HashMap<>();
 queryParameters.put("hoge", "fuga");
 
-new TinyURIBuilder()
+new URIBuilderTiny()
 	.setScheme("https")
 	.setHost("java.example.com")
 	.setPort(8080)
@@ -27,7 +27,7 @@ new TinyURIBuilder()
 ### With URI string as initial value
 
 ```java
-new TinyURIBuilder("https://java.example.com/foo/bar")
+new URIBuilderTiny("https://java.example.com/foo/bar")
 	.setPort(8080)
 	.appendPaths(Arrays.asList("buz", "qux"))
 	.addQueryParameter("hoge", "fuga")
@@ -39,7 +39,7 @@ new TinyURIBuilder("https://java.example.com/foo/bar")
 ### With URI instance as initial value
 
 ```java
-new TinyURIBuilder(new URI("https://java.example.com/foo/bar"))
+new URIBuilderTiny(new URI("https://java.example.com/foo/bar"))
 	.setPort(8080)
 	.appendPaths(Arrays.asList("buz", "qux"))
 	.addQueryParameter("hoge", "fuga")
@@ -51,14 +51,14 @@ new TinyURIBuilder(new URI("https://java.example.com/foo/bar"))
 Description
 --
 
-tiny-uribuilder is a minimal URI builder.
+uribuilder-tiny is a minimal URI builder.
 
 [URIBuilder](https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/utils/URIBuilder.html)
 of [Apache HttpClient](https://hc.apache.org/httpcomponents-client-ga/) is a similar library.
 It is a major and useful library. But it has lots of methods that are not much needed,
 lacked some convenient methods (e.g. `appendPaths`) and it is a component of HttpClient so we cannot use it independently.
 
-So I implement tiny-uribuilder to solve these frustration.
+So I implement uribuilder-tiny to solve these frustration.
 This library is minimal and independent from any others.
 
 Methods
@@ -66,7 +66,7 @@ Methods
 
 Please see javadoc.
 
-[![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/tiny-uribuilder)
+[![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny)
 
 Author
 --

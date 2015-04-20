@@ -1,4 +1,4 @@
-package net.moznion.tinyuribuilder;
+package net.moznion.uribuildertiny;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -18,10 +18,9 @@ import java.util.stream.Collectors;
 /**
  * Minimal URI builder.
  * 
- * @deprecated Please use {@link URIBuilderTiny}
  * @author moznion
  */
-public class TinyURIBuilder {
+public class URIBuilderTiny {
   @Getter
   private String scheme;
   @Getter
@@ -42,7 +41,7 @@ public class TinyURIBuilder {
    * 
    * @throws URISyntaxException
    */
-  public TinyURIBuilder() throws URISyntaxException {
+  public URIBuilderTiny() throws URISyntaxException {
     this(new URI(""));
   }
 
@@ -54,7 +53,7 @@ public class TinyURIBuilder {
    * @param uriString
    * @throws URISyntaxException
    */
-  public TinyURIBuilder(@NonNull String uriString) throws URISyntaxException {
+  public URIBuilderTiny(@NonNull String uriString) throws URISyntaxException {
     this(new URI(uriString));
   }
 
@@ -65,7 +64,7 @@ public class TinyURIBuilder {
    * 
    * @param uri
    */
-  public TinyURIBuilder(@NonNull URI uri) {
+  public URIBuilderTiny(@NonNull URI uri) {
     scheme = uri.getScheme();
     if (scheme == null) {
       scheme = "";
@@ -107,7 +106,7 @@ public class TinyURIBuilder {
    * @param scheme
    * @return
    */
-  public TinyURIBuilder setScheme(@NonNull String scheme) {
+  public URIBuilderTiny setScheme(@NonNull String scheme) {
     this.scheme = scheme;
     return this;
   }
@@ -120,7 +119,7 @@ public class TinyURIBuilder {
    * @param host
    * @return
    */
-  public TinyURIBuilder setHost(@NonNull String host) {
+  public URIBuilderTiny setHost(@NonNull String host) {
     boolean isTrailingSlash = false;
     final int hostLength = host.length();
     if (host.substring(hostLength - 1).equals("/")) { // is last character slash?
@@ -143,7 +142,7 @@ public class TinyURIBuilder {
    * @param port
    * @return
    */
-  public TinyURIBuilder setPort(int port) {
+  public URIBuilderTiny setPort(int port) {
     this.port = port;
     return this;
   }
@@ -157,7 +156,7 @@ public class TinyURIBuilder {
    * @param paths
    * @return
    */
-  public TinyURIBuilder setPaths(@NonNull List<String> paths) {
+  public URIBuilderTiny setPaths(@NonNull List<String> paths) {
     this.paths.clear();
     this.paths.addAll(urlEncoder.encode(paths));
     return this;
@@ -171,7 +170,7 @@ public class TinyURIBuilder {
    * @param paths
    * @return
    */
-  public TinyURIBuilder appendPaths(@NonNull List<String> paths) {
+  public URIBuilderTiny appendPaths(@NonNull List<String> paths) {
     this.paths.addAll(urlEncoder.encode(paths));
     return this;
   }
@@ -185,7 +184,7 @@ public class TinyURIBuilder {
    * @param queryParameters
    * @return
    */
-  public TinyURIBuilder setQueryParameters(@NonNull Map<String, String> queryParameters) {
+  public URIBuilderTiny setQueryParameters(@NonNull Map<String, String> queryParameters) {
     this.queryParameters.clear();
     this.queryParameters.putAll(urlEncoder.encode(queryParameters));
     return this;
@@ -201,7 +200,7 @@ public class TinyURIBuilder {
    * @param value
    * @return
    */
-  public TinyURIBuilder setQueryParameter(@NonNull String key, @NonNull String value) {
+  public URIBuilderTiny setQueryParameter(@NonNull String key, @NonNull String value) {
     this.queryParameters.clear();
     this.queryParameters.put(urlEncoder.encode(key), urlEncoder.encode(value));
     return this;
@@ -215,7 +214,7 @@ public class TinyURIBuilder {
    * @param queryParameters
    * @return
    */
-  public TinyURIBuilder addQueryParameters(@NonNull Map<String, String> queryParameters) {
+  public URIBuilderTiny addQueryParameters(@NonNull Map<String, String> queryParameters) {
     this.queryParameters.putAll(urlEncoder.encode(queryParameters));
     return this;
   }
@@ -229,7 +228,7 @@ public class TinyURIBuilder {
    * @param value
    * @return
    */
-  public TinyURIBuilder addQueryParameter(@NonNull String key, @NonNull String value) {
+  public URIBuilderTiny addQueryParameter(@NonNull String key, @NonNull String value) {
     this.queryParameters.put(urlEncoder.encode(key), urlEncoder.encode(value));
     return this;
   }
@@ -242,7 +241,7 @@ public class TinyURIBuilder {
    * @param fragment
    * @return
    */
-  public TinyURIBuilder setFragment(@NonNull String fragment) {
+  public URIBuilderTiny setFragment(@NonNull String fragment) {
     this.fragment = urlEncoder.encode(fragment);
     return this;
   }
