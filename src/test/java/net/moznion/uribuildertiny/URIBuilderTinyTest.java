@@ -2,14 +2,13 @@ package net.moznion.uribuildertiny;
 
 import static org.junit.Assert.assertEquals;
 
-import net.moznion.uribuildertiny.URIBuilderTiny;
-
 import org.junit.Test;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -192,12 +191,12 @@ public class URIBuilderTinyTest {
 
   @Test(expected = NullPointerException.class)
   public void shouldNPEWhenPassNullIntoSetPaths() throws URISyntaxException {
-    new URIBuilderTiny().setPaths(null);
+    new URIBuilderTiny().setPaths((List<String>) null);
   }
 
   @Test(expected = NullPointerException.class)
   public void shouldNPEWhenPassNullIntoAppendPaths() throws URISyntaxException {
-    new URIBuilderTiny().appendPaths(null);
+    new URIBuilderTiny().appendPaths((List<String>) null);
   }
 
   @Test(expected = NullPointerException.class)
@@ -298,5 +297,38 @@ public class URIBuilderTinyTest {
     assertEquals(Arrays.asList("foo", "bar", "buz", "qux"), b.getPaths());
     assertEquals(expectedQueryParams, b.getQueryParameters());
     assertEquals("frag", b.getFragment());
+  }
+
+  @Test
+  public void testForVarargSetPaths() throws URISyntaxException {
+    URI got = new URIBuilderTiny()
+        .setScheme("http")
+        .setHost("java.example.com")
+        .setPort(8080)
+        .setPaths("foo", "bar")
+        .build();
+    assertEquals("http://java.example.com:8080/foo/bar", got.toString());
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void shouldNPEWhenPassNullIntoVarargSetPaths() throws URISyntaxException {
+    new URIBuilderTiny().setPaths((String[]) null);
+  }
+
+  @Test
+  public void testForVarargAppendPaths() throws URISyntaxException {
+    URI got = new URIBuilderTiny()
+        .setScheme("http")
+        .setHost("java.example.com")
+        .setPort(8080)
+        .setPaths("foo", "bar")
+        .appendPaths("qux", "quux")
+        .build();
+    assertEquals("http://java.example.com:8080/foo/bar/qux/quux", got.toString());
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void shouldNPEWhenPassNullIntoVarargAppendPaths() throws URISyntaxException {
+    new URIBuilderTiny().appendPaths((String[]) null);
   }
 }
