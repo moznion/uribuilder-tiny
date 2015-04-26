@@ -41,7 +41,7 @@ new URIBuilderTiny("https://java.example.com/foo/bar")
 ```java
 new URIBuilderTiny(new URI("https://java.example.com/foo/bar"))
 	.setPort(8080)
-	.appendPaths("buz", "qux")
+	.appendPathsByString("/buz/qux")
 	.addQueryParameter("hoge", "fuga")
 	.addQueryParameter("piyo", "hogera")
 	.setFragment("frag")

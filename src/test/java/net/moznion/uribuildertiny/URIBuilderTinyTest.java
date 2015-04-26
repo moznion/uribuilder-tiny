@@ -331,4 +331,16 @@ public class URIBuilderTinyTest {
   public void shouldNPEWhenPassNullIntoVarargAppendPaths() throws URISyntaxException {
     new URIBuilderTiny().appendPaths((String[]) null);
   }
+
+  @Test
+  public void testForSettingAndAppendingPathsByString() throws URISyntaxException {
+    URI got = new URIBuilderTiny()
+        .setScheme("http")
+        .setHost("java.example.com")
+        .setPort(8080)
+        .setPathsByString("/foo/bar")
+        .appendPathsByString("/qux/quux")
+        .build();
+    assertEquals("http://java.example.com:8080/foo/bar/qux/quux", got.toString());
+  }
 }

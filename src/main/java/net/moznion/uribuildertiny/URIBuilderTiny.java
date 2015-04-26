@@ -178,6 +178,21 @@ public class URIBuilderTiny {
   }
 
   /**
+   * Set paths by string.
+   *
+   * It splits paths string by "/" and replace paths with them. This method applies percent-encoding
+   * to paths automatically.
+   *
+   * @param paths
+   * @return
+   */
+  public URIBuilderTiny setPathsByString(@NonNull String paths) {
+    this.paths.clear();
+    this.paths.addAll(urlEncoder.encode(Arrays.asList(paths.split("/"))));
+    return this;
+  }
+
+  /**
    * Append paths to current paths.
    * 
    * This method applies percent-encoding to paths automatically.
@@ -200,6 +215,20 @@ public class URIBuilderTiny {
    */
   public URIBuilderTiny appendPaths(@NonNull String... paths) {
     this.paths.addAll(urlEncoder.encode(Arrays.asList(paths)));
+    return this;
+  }
+
+  /**
+   * Append paths to current paths by string.
+   *
+   * It splits paths string by "/" and append them to current paths. This method applies
+   * percent-encoding to paths automatically.
+   *
+   * @param paths
+   * @return
+   */
+  public URIBuilderTiny appendPathsByString(@NonNull String paths) {
+    this.paths.addAll(urlEncoder.encode(Arrays.asList(paths.split("/"))));
     return this;
   }
 
