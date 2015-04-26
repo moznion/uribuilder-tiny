@@ -1,0 +1,33 @@
+2.0.2   Mon Apr 27 00:00:40 2015 +0900
+
+    - Add some methods which receive string as argument
+        - URIBuilderTiny.setPathsByString(String paths)
+        - URIBuilderTiny.appendPathsByString(String paths)
+
+2.0.1   Tue Apr 21 10:19:49 2015 +0900
+
+    - Support variable args
+
+2.0.0   Mon Apr 20 11:48:31 2015 +0900
+
+    - Change library name
+
+1.2.1   Mon Apr 20 11:40:46 2015 +0900
+
+    - Change TinyURIBuilder class to deprecated.
+
+1.2.0   Sun Apr 19 16:48:28 2015 +0900
+
+    - [Destructive Change] Fix typo of method name
+    - Fix bug to handle the trailing slash
+    - Add `TinyURIBuilder.setQueryParameter(String key, String value)` method
+
+
+1.1.0   Sun Apr 19 15:14:40 2015 +0900
+
+    - [Destructive Change] Remove some not good methods
+
+1.0.0   Fri Apr 17 21:19:43 2015 +0900
+
+    - Original version
+
