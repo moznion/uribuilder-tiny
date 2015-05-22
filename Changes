@@ -1,3 +1,7 @@
+2.0.3   Fri May 22 18:31:13 2015 +0900
+
+    - Fix bug which is related to scheme
+
 2.0.2   Mon Apr 27 00:00:40 2015 +0900
 
     - Add some methods which receive string as argument
