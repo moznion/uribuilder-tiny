@@ -1,7 +1,5 @@
 package net.moznion.uribuildertiny;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 import java.net.URI;
@@ -11,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import static org.junit.Assert.assertEquals;
 
 public class URIBuilderTinyTest {
   @Test
@@ -342,5 +342,14 @@ public class URIBuilderTinyTest {
         .appendPathsByString("/qux/quux")
         .build();
     assertEquals("http://java.example.com:8080/foo/bar/qux/quux", got.toString());
+  }
+
+  @Test
+  public void testForSchemeAndPathsCase() throws URISyntaxException {
+    URI got = new URIBuilderTiny()
+      .setScheme("http")
+      .appendPaths("foo", "bar")
+      .build();
+    assertEquals("http://foo/bar", got.toString());
   }
 }

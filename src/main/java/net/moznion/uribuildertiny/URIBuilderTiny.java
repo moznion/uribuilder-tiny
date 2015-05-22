@@ -38,7 +38,7 @@ public class URIBuilderTiny {
 
   /**
    * Create a new empty instance.
-   * 
+   *
    * @throws URISyntaxException
    */
   public URIBuilderTiny() throws URISyntaxException {
@@ -47,9 +47,9 @@ public class URIBuilderTiny {
 
   /**
    * Create a new instance according to passed URI string.
-   * 
+   *
    * This method doesn't apply percent-encoding to URI string which is passed via argument.
-   * 
+   *
    * @param uriString
    * @throws URISyntaxException
    */
@@ -59,9 +59,9 @@ public class URIBuilderTiny {
 
   /**
    * Create a new instance according to passed URI instance.
-   * 
+   *
    * This method doesn't apply percent-encoding to URI which is passed via argument.
-   * 
+   *
    * @param uri
    */
   public URIBuilderTiny(@NonNull URI uri) {
@@ -102,7 +102,7 @@ public class URIBuilderTiny {
 
   /**
    * Set a scheme.
-   * 
+   *
    * @param scheme
    * @return
    */
@@ -113,9 +113,9 @@ public class URIBuilderTiny {
 
   /**
    * Set a host.
-   * 
+   *
    * This method applies percent-encoding to host automatically.
-   * 
+   *
    * @param host
    * @return
    */
@@ -136,9 +136,9 @@ public class URIBuilderTiny {
 
   /**
    * Set port number.
-   * 
+   *
    * If you pass a negative value to this argument, this builder deals as port isn't specified.
-   * 
+   *
    * @param port
    * @return
    */
@@ -149,10 +149,10 @@ public class URIBuilderTiny {
 
   /**
    * Set paths.
-   * 
+   *
    * Replace current paths with argument. This method applies percent-encoding to paths
    * automatically.
-   * 
+   *
    * @param paths
    * @return
    */
@@ -164,10 +164,10 @@ public class URIBuilderTiny {
 
   /**
    * Set paths.
-   * 
+   *
    * Replace current paths with argument. This method applies percent-encoding to paths
    * automatically.
-   * 
+   *
    * @param paths
    * @return
    */
@@ -194,9 +194,9 @@ public class URIBuilderTiny {
 
   /**
    * Append paths to current paths.
-   * 
+   *
    * This method applies percent-encoding to paths automatically.
-   * 
+   *
    * @param paths
    * @return
    */
@@ -207,9 +207,9 @@ public class URIBuilderTiny {
 
   /**
    * Append paths to current paths.
-   * 
+   *
    * This method applies percent-encoding to paths automatically.
-   * 
+   *
    * @param paths
    * @return
    */
@@ -234,10 +234,10 @@ public class URIBuilderTiny {
 
   /**
    * Set query parameters.
-   * 
+   *
    * Replace current query parameters with argument. This method applies percent-encoding to query
    * parameters automatically.
-   * 
+   *
    * @param queryParameters
    * @return
    */
@@ -249,10 +249,10 @@ public class URIBuilderTiny {
 
   /**
    * Set a query parameter.
-   * 
+   *
    * Replace current query parameter with argument. This method applies percent-encoding to a query
    * parameter automatically.
-   * 
+   *
    * @param key
    * @param value
    * @return
@@ -265,9 +265,9 @@ public class URIBuilderTiny {
 
   /**
    * Add query parameters.
-   * 
+   *
    * This method applies percent-encoding to query parameters automatically.
-   * 
+   *
    * @param queryParameters
    * @return
    */
@@ -278,9 +278,9 @@ public class URIBuilderTiny {
 
   /**
    * Add a query parameter.
-   * 
+   *
    * This method applies percent-encoding to a query parameter automatically.
-   * 
+   *
    * @param key
    * @param value
    * @return
@@ -292,9 +292,9 @@ public class URIBuilderTiny {
 
   /**
    * Set a fragment.
-   * 
+   *
    * This method applies percent-encoding to a fragment automatically.
-   * 
+   *
    * @param fragment
    * @return
    */
@@ -307,7 +307,7 @@ public class URIBuilderTiny {
 
   /**
    * Build a new URI instance by according to builder's information.
-   * 
+   *
    * @return
    * @throws URISyntaxException
    */
@@ -316,7 +316,7 @@ public class URIBuilderTiny {
 
     boolean shouldAppendTrailingSlash = false;
     if (!host.isEmpty()) {
-      if (host.substring(host.length() - 1).equals("/")) { // is last character slash?
+      if (host.charAt(host.length() - 1) == '/') { // is last character slash?
         shouldAppendTrailingSlash = true;
         host = host.substring(0, host.length() - 1);
       }
@@ -327,20 +327,16 @@ public class URIBuilderTiny {
       uriStringBuilder.append(":").append(port);
     }
 
-    if (paths.isEmpty()) {
-      if (shouldAppendTrailingSlash) {
-        uriStringBuilder.append("/");
-      }
-    } else {
+    if (!paths.isEmpty()) {
       for (String path : paths) {
         if (!path.isEmpty()) {
           uriStringBuilder.append("/").append(path);
         }
       }
+    }
 
-      if (shouldAppendTrailingSlash) {
-        uriStringBuilder.append("/");
-      }
+    if (shouldAppendTrailingSlash) {
+      uriStringBuilder.append("/");
     }
 
     if (!queryParameters.isEmpty()) {
@@ -363,7 +359,11 @@ public class URIBuilderTiny {
     uriString = CONSECUTIVE_SLASHES_RE.matcher(uriString).replaceAll("/"); // Squash consecutive
                                                                            // slashes
     if (!scheme.isEmpty()) {
-      uriString = scheme + "://" + uriString;
+      String glue = "://";
+      if (uriString.charAt(0) == '/') {
+        glue = ":/"; // the second slash for scheme exists in uriString, so reduced
+      }
+      uriString = scheme + glue + uriString;
     }
 
     return new URI(uriString);
