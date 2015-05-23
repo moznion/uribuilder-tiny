@@ -191,7 +191,7 @@ public class URIBuilderTinyTest {
 
     @Test(expected = NullPointerException.class)
     public void shouldNPEWhenPassNullIntoSetPaths() throws URISyntaxException {
-        new URIBuilderTiny().setPaths((List<String>) null);
+        new URIBuilderTiny().setPaths((List<Object>) null);
     }
 
     @Test(expected = NullPointerException.class)
@@ -351,5 +351,38 @@ public class URIBuilderTinyTest {
                 .appendPaths("foo", "bar")
                 .build();
         assertEquals("http://foo/bar", got.toString());
+    }
+
+    @Test
+    public void shouldSetPathsEvenIfAnyTypeByList() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.example.com")
+                .setPaths(Arrays.asList("foo", 1, (long) 100, true, new Foo("bar")))
+                .build();
+        assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
+    }
+
+    @Test
+    public void shouldSetPathsEvenIfAnyTypeByVararg() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.example.com")
+                .setPaths("foo", 1, (long) 100, true, new Foo("bar"))
+                .build();
+        assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
+    }
+
+    private static class Foo {
+        private String foo;
+
+        public Foo(String foo) {
+            this.foo = foo;
+        }
+
+        @Override
+        public String toString() {
+            return foo;
+        }
     }
 }

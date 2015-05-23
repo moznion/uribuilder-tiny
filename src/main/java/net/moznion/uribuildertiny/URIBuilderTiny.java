@@ -156,7 +156,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public URIBuilderTiny setPaths(@NonNull List<String> paths) {
+    public URIBuilderTiny setPaths(@NonNull List<Object> paths) {
         this.paths.clear();
         this.paths.addAll(urlEncoder.encode(paths));
         return this;
@@ -171,7 +171,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public URIBuilderTiny setPaths(@NonNull String... paths) {
+    public URIBuilderTiny setPaths(@NonNull Object... paths) {
         this.paths.clear();
         this.paths.addAll(urlEncoder.encode(Arrays.asList(paths)));
         return this;

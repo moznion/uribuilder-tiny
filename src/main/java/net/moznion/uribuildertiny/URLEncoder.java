@@ -21,9 +21,9 @@ class URLEncoder {
         }
     }
 
-    public List<String> encode(List<String> input) {
+    public <T> List<String> encode(List<T> input) {
         return input.stream()
-                .map(item -> encode(item))
+                .map(item -> encode(item.toString()))
                 .collect(Collectors.toList());
     }
 
