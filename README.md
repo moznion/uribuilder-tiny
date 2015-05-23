@@ -72,7 +72,7 @@ You can put any type instance as arguments for `URIBuilderTiny#setPaths()` and `
 
 And you can also put any type instance as arguments of value of query parameters for
 `URIBuilderTiny#setQueryParameters()`, `URIBuilderTiny#setQueryParameter()`,
-`URIBuilderTiny#addQueryParameters()` and `URIBuilderTiny#addQueryParameter()`..
+`URIBuilderTiny#addQueryParameters()` and `URIBuilderTiny#addQueryParameter()`.
 
 It will call `Object#toString()` for each these instances implicitly to stringify them.
 
