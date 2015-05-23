@@ -156,7 +156,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public URIBuilderTiny setPaths(@NonNull List<Object> paths) {
+    public <T> URIBuilderTiny setPaths(@NonNull List<T> paths) {
         this.paths.clear();
         this.paths.addAll(urlEncoder.encode(paths));
         return this;
@@ -171,7 +171,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public URIBuilderTiny setPaths(@NonNull Object... paths) {
+    public <T> URIBuilderTiny setPaths(@NonNull T... paths) {
         this.paths.clear();
         this.paths.addAll(urlEncoder.encode(Arrays.asList(paths)));
         return this;
@@ -200,7 +200,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public URIBuilderTiny appendPaths(@NonNull List<Object> paths) {
+    public <T> URIBuilderTiny appendPaths(@NonNull List<T> paths) {
         this.paths.addAll(urlEncoder.encode(paths));
         return this;
     }
@@ -213,7 +213,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public URIBuilderTiny appendPaths(@NonNull Object... paths) {
+    public <T> URIBuilderTiny appendPaths(@NonNull T... paths) {
         this.paths.addAll(urlEncoder.encode(Arrays.asList(paths)));
         return this;
     }
