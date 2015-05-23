@@ -191,7 +191,7 @@ public class URIBuilderTinyTest {
 
     @Test(expected = NullPointerException.class)
     public void shouldNPEWhenPassNullIntoSetPaths() throws URISyntaxException {
-        new URIBuilderTiny().setPaths((List<String>) null);
+        new URIBuilderTiny().setPaths((List<Object>) null);
     }
 
     @Test(expected = NullPointerException.class)
@@ -351,5 +351,108 @@ public class URIBuilderTinyTest {
                 .appendPaths("foo", "bar")
                 .build();
         assertEquals("http://foo/bar", got.toString());
+    }
+
+    @Test
+    public void shouldSetPathsEvenIfAnyTypeByList() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.example.com")
+                .setPaths(Arrays.asList("foo", 1, (long) 100, true, new Foo("bar")))
+                .build();
+        assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
+    }
+
+    @Test
+    public void shouldSetPathsEvenIfAnyTypeByVararg() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.example.com")
+                .setPaths("foo", 1, (long) 100, true, new Foo("bar"))
+                .build();
+        assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
+    }
+
+    @Test
+    public void shouldAppendPathsEvenIfAnyTypeByList() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.example.com")
+                .appendPaths(Arrays.asList("foo", 1, (long) 100, true, new Foo("bar")))
+                .build();
+        assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
+    }
+
+    @Test
+    public void shouldAppendPathsEvenIfAnyTypeByVararg() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.example.com")
+                .setPaths("foo", 1, (long) 100, true, new Foo("bar"))
+                .build();
+        assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
+    }
+
+    @Test
+    public void shouldSetQueryParamEvenIfAnyTypeByMap() throws URISyntaxException {
+        Map<String, Object> queryParameters = new HashMap<>();
+        queryParameters.put("hoge", "fuga");
+        queryParameters.put("piyo", 1);
+        queryParameters.put("foo", new Foo("foo"));
+
+        URI got = new URIBuilderTiny("http://example.com")
+                .setQueryParameters(queryParameters)
+                .build();
+        assertEquals("http://example.com?foo=foo&hoge=fuga&piyo=1",
+                got.toString());
+    }
+
+    @Test
+    public void shouldSetQueryParamEvenIfAnyType() throws URISyntaxException {
+        URI got = new URIBuilderTiny("http://example.com")
+                .setQueryParameter("foo", new Foo("foo"))
+                .build();
+        assertEquals("http://example.com?foo=foo",
+                got.toString());
+    }
+
+    @Test
+    public void shouldAddQueryParamEvenIfAnyTypeByMap() throws URISyntaxException {
+        Map<String, Object> queryParameters = new HashMap<>();
+        queryParameters.put("hoge", "fuga");
+        queryParameters.put("piyo", 1);
+        queryParameters.put("foo", new Foo("foo"));
+
+        URI got = new URIBuilderTiny("http://example.com")
+                .addQueryParameters(queryParameters)
+                .build();
+        assertEquals("http://example.com?foo=foo&hoge=fuga&piyo=1",
+                got.toString());
+    }
+
+    @Test
+    public void shouldAddQueryParamEvenIfAnyType() throws URISyntaxException {
+        Map<String, Object> queryParameters = new HashMap<>();
+
+        URI got = new URIBuilderTiny("http://example.com")
+                .addQueryParameter("hoge", "fuga")
+                .addQueryParameter("piyo", 1)
+                .addQueryParameter("foo", new Foo("foo"))
+                .build();
+        assertEquals("http://example.com?foo=foo&hoge=fuga&piyo=1",
+                got.toString());
+    }
+
+    private static class Foo {
+        private String foo;
+
+        public Foo(String foo) {
+            this.foo = foo;
+        }
+
+        @Override
+        public String toString() {
+            return foo;
+        }
     }
 }
