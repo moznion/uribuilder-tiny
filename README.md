@@ -68,6 +68,14 @@ Please see javadoc.
 
 [![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny)
 
+You can put any type instance as arguments for `URIBuilderTiny#setPaths()` and `URIBuilderTiny#appendPaths()`.
+
+And you can also put any type instance as arguments of value of query parameters for
+`URIBuilderTiny#setQueryParameters()`, `URIBuilderTiny#setQueryParameter()`,
+`URIBuilderTiny#addQueryParameters()` and `URIBuilderTiny#addQueryParameter()`..
+
+It will call `Object#toString()` for each these instances implicitly to stringify them.
+
 Author
 --
 
