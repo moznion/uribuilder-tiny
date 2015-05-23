@@ -13,9 +13,9 @@ class URLEncoder {
         this.encodingCharsetName = encodingCharset.name();
     }
 
-    public String encode(String input) {
+    public <T> String encode(T input) {
         try {
-            return java.net.URLEncoder.encode(input, encodingCharsetName);
+            return java.net.URLEncoder.encode(input.toString(), encodingCharsetName);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -27,7 +27,7 @@ class URLEncoder {
                 .collect(Collectors.toList());
     }
 
-    public Map<String, String> encode(Map<String, String> input) {
+    public <T> Map<String, String> encode(Map<String, T> input) {
         return input.entrySet().stream()
                 .collect(Collectors.toMap(
                         kv -> encode(kv.getKey()),
