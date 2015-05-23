@@ -373,6 +373,26 @@ public class URIBuilderTinyTest {
         assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
     }
 
+    @Test
+    public void shouldAppendPathsEvenIfAnyTypeByList() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.example.com")
+                .appendPaths(Arrays.asList("foo", 1, (long) 100, true, new Foo("bar")))
+                .build();
+        assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
+    }
+
+    @Test
+    public void shouldAppendPathsEvenIfAnyTypeByVararg() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.example.com")
+                .appendPaths("foo", 1, (long) 100, true, new Foo("bar"))
+                .build();
+        assertEquals("https://java.example.com/foo/1/100/true/bar", got.toString());
+    }
+
     private static class Foo {
         private String foo;
 
