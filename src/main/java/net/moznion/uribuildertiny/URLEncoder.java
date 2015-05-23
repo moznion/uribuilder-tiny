@@ -1,5 +1,7 @@
 package net.moznion.uribuildertiny;
 
+import lombok.NonNull;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -13,7 +15,7 @@ class URLEncoder {
         this.encodingCharsetName = encodingCharset.name();
     }
 
-    public <T> String encode(T input) {
+    public <T> String encode(@NonNull T input) {
         try {
             return java.net.URLEncoder.encode(input.toString(), encodingCharsetName);
         } catch (UnsupportedEncodingException e) {
@@ -21,13 +23,13 @@ class URLEncoder {
         }
     }
 
-    public <T> List<String> encode(List<T> input) {
+    public <T> List<String> encode(@NonNull List<T> input) {
         return input.stream()
                 .map(item -> encode(item.toString()))
                 .collect(Collectors.toList());
     }
 
-    public <T> Map<String, String> encode(Map<String, T> input) {
+    public <T> Map<String, String> encode(@NonNull Map<String, T> input) {
         return input.entrySet().stream()
                 .collect(Collectors.toMap(
                         kv -> encode(kv.getKey()),
