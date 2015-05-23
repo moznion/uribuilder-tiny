@@ -7,30 +7,30 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 class URLEncoder {
-  private final String encodingCharsetName;
+    private final String encodingCharsetName;
 
-  public URLEncoder(Charset encodingCharset) {
-    this.encodingCharsetName = encodingCharset.name();
-  }
-
-  public String encode(String input) {
-    try {
-      return java.net.URLEncoder.encode(input, encodingCharsetName);
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
+    public URLEncoder(Charset encodingCharset) {
+        this.encodingCharsetName = encodingCharset.name();
     }
-  }
 
-  public List<String> encode(List<String> input) {
-    return input.stream()
-        .map(item -> encode(item))
-        .collect(Collectors.toList());
-  }
+    public String encode(String input) {
+        try {
+            return java.net.URLEncoder.encode(input, encodingCharsetName);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-  public Map<String, String> encode(Map<String, String> input) {
-    return input.entrySet().stream()
-        .collect(Collectors.toMap(
-            kv -> encode(kv.getKey()),
-            kv -> encode(kv.getValue())));
-  }
+    public List<String> encode(List<String> input) {
+        return input.stream()
+                .map(item -> encode(item))
+                .collect(Collectors.toList());
+    }
+
+    public Map<String, String> encode(Map<String, String> input) {
+        return input.entrySet().stream()
+                .collect(Collectors.toMap(
+                        kv -> encode(kv.getKey()),
+                        kv -> encode(kv.getValue())));
+    }
 }
