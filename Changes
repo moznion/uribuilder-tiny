@@ -1,6 +1,6 @@
 2.1.0   Sat May 23 16:02:53 2015 +0900
 
-    - Enable to put any type instances for following methods (not destructive change);
+    - Enable to put any type instances as argument for following methods (not destructive change);
         - URIBuilderTiny#setPaths()
         - URIBuilderTiny#appendPaths().
         - URIBuilderTiny#setQueryParameters()
