@@ -443,6 +443,35 @@ public class URIBuilderTinyTest {
                 got.toString());
     }
 
+    @Test
+    public void shouldApplyURIEncode() throws URISyntaxException {
+        Map<String, String> queryParameters = new HashMap<>();
+        queryParameters.put("h%oge", "f%uga");
+
+        URI got = new URIBuilderTiny()
+                .setScheme("https")
+                .setHost("java.e%xample.com")
+                .setPort(8080)
+                .setPaths(Arrays.asList("f%oo", "b%ar"))
+                .appendPaths(Arrays.asList("b%uz", "q%ux"))
+                .setQueryParameters(queryParameters)
+                .addQueryParameter("p%iyo", "h%ogera")
+                .setFragment("f%rag")
+                .build();
+        assertEquals("https://java.e%25xample.com:8080/f%25oo/b%25ar/b%25uz/q%25ux?h%25oge=f%25uga&p%25iyo=h%25ogera#f%25rag",
+                got.toString());
+    }
+
+    public void testForRemovingTrailingSlash() throws URISyntaxException {
+        URI got = new URIBuilderTiny()
+                .setScheme("http")
+                .setHost("java.example.com/")
+                .setPort(8080)
+                .forceRemoveTrailingSlash(true)
+                .build();
+        assertEquals("http://java.example.com:8080", got.toString());
+    }
+
     private static class Foo {
         private String foo;
 

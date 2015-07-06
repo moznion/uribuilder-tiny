@@ -307,6 +307,20 @@ public class URIBuilderTiny {
         return this;
     }
 
+    /**
+     * Set flag to decide to remove trailing slash.
+     * <p>
+     * This URI builder automatically append a trailing slash if part of host has that.
+     * So if you want to disable such function, please pass true value to this method.
+     *
+     * @param shouldRemove
+     * @return
+     */
+    public URIBuilderTiny forceRemoveTrailingSlash(boolean shouldRemove) {
+        this.forceRemoveTrailingSlash = shouldRemove;
+        return this;
+    }
+
     private static final Pattern CONSECUTIVE_SLASHES_RE = Pattern.compile("/+");
 
     /**
