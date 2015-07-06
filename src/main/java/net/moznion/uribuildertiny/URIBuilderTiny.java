@@ -33,6 +33,8 @@ public class URIBuilderTiny {
     private Map<String, String> queryParameters;
     @Getter
     private String fragment;
+    @Getter
+    private boolean forceRemoveTrailingSlash;
 
     private final URLEncoder urlEncoder;
 
@@ -98,6 +100,8 @@ public class URIBuilderTiny {
         }
 
         this.urlEncoder = new URLEncoder(StandardCharsets.UTF_8);
+
+        this.forceRemoveTrailingSlash = false;
     }
 
     /**
@@ -317,7 +321,7 @@ public class URIBuilderTiny {
         boolean shouldAppendTrailingSlash = false;
         if (!host.isEmpty()) {
             if (host.charAt(host.length() - 1) == '/') { // is last character slash?
-                shouldAppendTrailingSlash = true;
+                shouldAppendTrailingSlash = !forceRemoveTrailingSlash;
                 host = host.substring(0, host.length() - 1);
             }
             uriStringBuilder.append(host);
