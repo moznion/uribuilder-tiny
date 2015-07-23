@@ -1,8 +1,10 @@
-2.3.0   Thu Jul 23 22:26:28 2015 +0900
+2.3.0   Thu Jul 23 22:26:23 2015 +0900
 
     - Support provider of URIBuilderTiny with base URI
 
-2.2.0   N/A
+2.2.0   Mon Jul 6 11:42:50 2015 +0900
+
+    - Add option for deciding to remove trailing slash
 
 2.1.0   Sat May 23 16:02:53 2015 +0900
 
