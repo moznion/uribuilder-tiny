@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 /**
  * Provider of {@link URIBuilderTiny} with base URI.
  */
-public class URIBuilderTinyWithBase {
+public class URIBuilderTinyProviderWithBase {
     private final String baseUriString;
 
     /**
@@ -14,7 +14,7 @@ public class URIBuilderTinyWithBase {
      *
      * @param baseUriString base URI string
      */
-    public URIBuilderTinyWithBase(String baseUriString) {
+    public URIBuilderTinyProviderWithBase(String baseUriString) {
         this.baseUriString = baseUriString;
     }
 
@@ -23,7 +23,7 @@ public class URIBuilderTinyWithBase {
      *
      * @param baseUri base URI
      */
-    public URIBuilderTinyWithBase(URI baseUri) {
+    public URIBuilderTinyProviderWithBase(URI baseUri) {
         baseUriString = baseUri.toString();
     }
 

@@ -7,10 +7,10 @@ import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 
-public class URIBuilderTinyWithBaseTest {
+public class URIBuilderTinyProviderWithBaseTest {
     @Test
     public void shouldGetBuilderWithBaseURIString() throws URISyntaxException {
-        URIBuilderTinyWithBase withBase = new URIBuilderTinyWithBase("http://example.com");
+        URIBuilderTinyProviderWithBase withBase = new URIBuilderTinyProviderWithBase("http://example.com");
 
         {
             URIBuilderTiny ubt = withBase.getBuilder().appendPaths("foo");
@@ -25,7 +25,7 @@ public class URIBuilderTinyWithBaseTest {
 
     @Test
     public void shouldGetBuilderWithBaseURI() throws URISyntaxException {
-        URIBuilderTinyWithBase withBase = new URIBuilderTinyWithBase(new URI("http://example.com"));
+        URIBuilderTinyProviderWithBase withBase = new URIBuilderTinyProviderWithBase(new URI("http://example.com"));
 
         {
             URIBuilderTiny ubt = withBase.getBuilder().appendPaths("foo");
