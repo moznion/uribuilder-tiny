@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Minimal URI builder.
@@ -93,10 +92,12 @@ public class URIBuilderTiny {
         queryParameters = new TreeMap<>();
         String queryString = uri.getQuery();
         if (queryString != null && !queryString.isEmpty()) {
-            queryParameters.putAll(Arrays.stream(queryString.split("&"))
-                    .map(term -> term.split("="))
-                    .filter(keyValue -> keyValue.length == 2)
-                    .collect(Collectors.toMap(kv -> kv[0], kv -> kv[1])));
+            for (String term : queryString.split("&")) {
+                final String[] kv = term.split("=");
+                if (kv.length == 2) {
+                    queryParameters.put(kv[0], kv[1]);
+                }
+            }
         }
 
         this.urlEncoder = new URLEncoder(StandardCharsets.UTF_8);

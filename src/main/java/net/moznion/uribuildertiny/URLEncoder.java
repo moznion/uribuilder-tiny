@@ -4,9 +4,10 @@ import lombok.NonNull;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 class URLEncoder {
     private final String encodingCharsetName;
@@ -24,15 +25,18 @@ class URLEncoder {
     }
 
     public <T> List<String> encode(@NonNull List<T> input) {
-        return input.stream()
-                .map(item -> encode(item.toString()))
-                .collect(Collectors.toList());
+        final ArrayList<String> encodedList = new ArrayList<>();
+        for (T item : input) {
+            encodedList.add(encode(item.toString()));
+        }
+        return encodedList;
     }
 
     public <T> Map<String, String> encode(@NonNull Map<String, T> input) {
-        return input.entrySet().stream()
-                .collect(Collectors.toMap(
-                        kv -> encode(kv.getKey()),
-                        kv -> encode(kv.getValue())));
+        final HashMap<String, String> encodedMap = new HashMap<>();
+        for (Map.Entry<String, T> kv : input.entrySet()) {
+            encodedMap.put(encode(kv.getKey()), encode(kv.getValue()));
+        }
+        return encodedMap;
     }
 }
