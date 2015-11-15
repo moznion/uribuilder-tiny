@@ -361,12 +361,15 @@ public class URIBuilderTiny {
         if (!queryParameters.isEmpty()) {
             uriStringBuilder.append("?");
 
-            List<String> terms = new ArrayList<>();
+            int i = 1;
+            final int size = queryParameters.size();
             for (Entry<String, String> queryParameter : queryParameters.entrySet()) {
-                terms.add(queryParameter.getKey() + "=" + queryParameter.getValue());
+                uriStringBuilder.append(queryParameter.getKey()).append("=").append(queryParameter.getValue());
+                if (i != size) {
+                    uriStringBuilder.append("&");
+                }
+                i++;
             }
-
-            uriStringBuilder.append(String.join("&", terms));
         }
 
         if (!fragment.isEmpty()) {
