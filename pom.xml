@@ -7,7 +7,7 @@
 	<packaging>jar</packaging>
 
 	<name>uribuilder-tiny</name>
-	<description>Minimal URI Builder for Java 8</description>
+	<description>Minimal and smart URI Builder</description>
 	<url>https://github.com/moznion/uribuilder-tiny</url>
 
 	<properties>

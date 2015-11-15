@@ -1,7 +1,7 @@
 uribuilder-tiny [![Build Status](https://travis-ci.org/moznion/uribuilder-tiny.svg)](https://travis-ci.org/moznion/uribuilder-tiny) [![Coverage Status](https://coveralls.io/repos/moznion/uribuilder-tiny/badge.svg?branch=master)](https://coveralls.io/r/moznion/uribuilder-tiny?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.moznion/uribuilder-tiny/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.moznion/uribuilder-tiny) [![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny)
 =============
 
-Minimal URI builder.
+Minimal and smart URI builder.
 
 Synopsis
 ---
@@ -75,6 +75,11 @@ And you can also put any type instance as arguments of value of query parameters
 `URIBuilderTiny#addQueryParameters()` and `URIBuilderTiny#addQueryParameter()`.
 
 It will call `Object#toString()` for each these instances implicitly to stringify them.
+
+Requires
+==
+
+- Java 7 or later
 
 Author
 --
