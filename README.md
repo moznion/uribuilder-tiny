@@ -1,7 +1,7 @@
 uribuilder-tiny [![Build Status](https://travis-ci.org/moznion/uribuilder-tiny.svg)](https://travis-ci.org/moznion/uribuilder-tiny) [![Coverage Status](https://coveralls.io/repos/moznion/uribuilder-tiny/badge.svg?branch=master)](https://coveralls.io/r/moznion/uribuilder-tiny?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.moznion/uribuilder-tiny/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.moznion/uribuilder-tiny) [![javadoc.io](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny/badge.svg)](https://javadocio-badges.herokuapp.com/net.moznion/uribuilder-tiny)
 =============
 
-Minimal and smart URI builder.
+Minimal and smart URI builder for Java.
 
 Synopsis
 ---
@@ -51,7 +51,7 @@ new URIBuilderTiny(new URI("https://java.example.com/foo/bar"))
 Description
 --
 
-uribuilder-tiny is a minimal URI builder.
+uribuilder-tiny is a minimal URI builder for Java.
 
 [URIBuilder](https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/utils/URIBuilder.html)
 of [Apache HttpClient](https://hc.apache.org/httpcomponents-client-ga/) is a similar library.
