@@ -1,3 +1,7 @@
+2.5.0   Sun Nov 15 16:41:14 2015 +0900
+
+    - Support Java 7
+
 2.4.0   Thu Jul 23 22:45:04 2015 +0900
 
     - Rename provider of URIBuilderTiny with base URI
