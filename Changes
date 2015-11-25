@@ -1,3 +1,7 @@
+2.6.0   Wed Nov 25 14:42:56 2015 +0900
+
+    - Allow generic type (suppress some warnings)
+
 2.5.0   Sun Nov 15 16:41:14 2015 +0900
 
     - Support Java 7
