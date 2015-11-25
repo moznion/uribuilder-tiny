@@ -16,7 +16,7 @@ class URLEncoder {
         this.encodingCharsetName = encodingCharset.name();
     }
 
-    public <T> String encode(@NonNull T input) {
+    public String encode(@NonNull Object input) {
         try {
             return java.net.URLEncoder.encode(input.toString(), encodingCharsetName);
         } catch (UnsupportedEncodingException e) {
@@ -24,17 +24,17 @@ class URLEncoder {
         }
     }
 
-    public <T> List<String> encode(@NonNull List<T> input) {
+    public List<String> encode(@NonNull List<?> input) {
         final ArrayList<String> encodedList = new ArrayList<>();
-        for (T item : input) {
+        for (Object item : input) {
             encodedList.add(encode(item.toString()));
         }
         return encodedList;
     }
 
-    public <T> Map<String, String> encode(@NonNull Map<String, T> input) {
+    public Map<String, String> encode(@NonNull Map<String, ?> input) {
         final HashMap<String, String> encodedMap = new HashMap<>();
-        for (Map.Entry<String, T> kv : input.entrySet()) {
+        for (Map.Entry<String, ?> kv : input.entrySet()) {
             encodedMap.put(encode(kv.getKey()), encode(kv.getValue()));
         }
         return encodedMap;

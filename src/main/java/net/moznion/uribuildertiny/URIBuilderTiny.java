@@ -161,7 +161,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public <T> URIBuilderTiny setPaths(@NonNull List<T> paths) {
+    public URIBuilderTiny setPaths(@NonNull List<?> paths) {
         this.paths.clear();
         this.paths.addAll(urlEncoder.encode(paths));
         return this;
@@ -176,7 +176,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public <T> URIBuilderTiny setPaths(@NonNull T... paths) {
+    public URIBuilderTiny setPaths(@NonNull Object... paths) {
         this.paths.clear();
         this.paths.addAll(urlEncoder.encode(Arrays.asList(paths)));
         return this;
@@ -205,7 +205,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public <T> URIBuilderTiny appendPaths(@NonNull List<T> paths) {
+    public URIBuilderTiny appendPaths(@NonNull List<?> paths) {
         this.paths.addAll(urlEncoder.encode(paths));
         return this;
     }
@@ -218,7 +218,7 @@ public class URIBuilderTiny {
      * @param paths
      * @return
      */
-    public <T> URIBuilderTiny appendPaths(@NonNull T... paths) {
+    public URIBuilderTiny appendPaths(@NonNull Object... paths) {
         this.paths.addAll(urlEncoder.encode(Arrays.asList(paths)));
         return this;
     }
@@ -262,7 +262,7 @@ public class URIBuilderTiny {
      * @param value
      * @return
      */
-    public <T> URIBuilderTiny setQueryParameter(@NonNull String key, @NonNull T value) {
+    public URIBuilderTiny setQueryParameter(@NonNull String key, @NonNull Object value) {
         this.queryParameters.clear();
         this.queryParameters.put(urlEncoder.encode(key), urlEncoder.encode(value));
         return this;
@@ -276,7 +276,7 @@ public class URIBuilderTiny {
      * @param queryParameters
      * @return
      */
-    public <T> URIBuilderTiny addQueryParameters(@NonNull Map<String, T> queryParameters) {
+    public URIBuilderTiny addQueryParameters(@NonNull Map<String, ?> queryParameters) {
         this.queryParameters.putAll(urlEncoder.encode(queryParameters));
         return this;
     }
@@ -290,7 +290,7 @@ public class URIBuilderTiny {
      * @param value
      * @return
      */
-    public <T> URIBuilderTiny addQueryParameter(@NonNull String key, @NonNull T value) {
+    public URIBuilderTiny addQueryParameter(@NonNull String key, @NonNull Object value) {
         this.queryParameters.put(urlEncoder.encode(key), urlEncoder.encode(value));
         return this;
     }
