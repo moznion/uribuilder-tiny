@@ -1,3 +1,7 @@
+2.6.1   Fri Jan 29 15:28:36 2016 +0900
+
+    - Suppress nagging checked exception
+
 2.6.0   Wed Nov 25 14:42:56 2015 +0900
 
     - Allow generic type (suppress some warnings)
