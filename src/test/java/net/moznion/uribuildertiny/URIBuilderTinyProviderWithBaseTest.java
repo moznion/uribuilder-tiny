@@ -3,13 +3,12 @@ package net.moznion.uribuildertiny;
 import org.junit.Test;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 
 public class URIBuilderTinyProviderWithBaseTest {
     @Test
-    public void shouldGetBuilderWithBaseURIString() throws URISyntaxException {
+    public void shouldGetBuilderWithBaseURIString() {
         URIBuilderTinyProviderWithBase withBase = new URIBuilderTinyProviderWithBase("http://example.com");
 
         {
@@ -24,8 +23,8 @@ public class URIBuilderTinyProviderWithBaseTest {
     }
 
     @Test
-    public void shouldGetBuilderWithBaseURI() throws URISyntaxException {
-        URIBuilderTinyProviderWithBase withBase = new URIBuilderTinyProviderWithBase(new URI("http://example.com"));
+    public void shouldGetBuilderWithBaseURI() {
+        URIBuilderTinyProviderWithBase withBase = new URIBuilderTinyProviderWithBase(URI.create("http://example.com"));
 
         {
             URIBuilderTiny ubt = withBase.getBuilder().appendPaths("foo");

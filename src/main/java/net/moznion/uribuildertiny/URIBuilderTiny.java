@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,11 +38,9 @@ public class URIBuilderTiny {
 
     /**
      * Create a new empty instance.
-     *
-     * @throws URISyntaxException
      */
-    public URIBuilderTiny() throws URISyntaxException {
-        this(new URI(""));
+    public URIBuilderTiny() {
+        this(URI.create(""));
     }
 
     /**
@@ -52,10 +49,9 @@ public class URIBuilderTiny {
      * This method doesn't apply percent-encoding to URI string which is passed via argument.
      *
      * @param uriString
-     * @throws URISyntaxException
      */
-    public URIBuilderTiny(@NonNull String uriString) throws URISyntaxException {
-        this(new URI(uriString));
+    public URIBuilderTiny(@NonNull String uriString) {
+        this(URI.create(uriString));
     }
 
     /**
@@ -328,9 +324,8 @@ public class URIBuilderTiny {
      * Build a new URI instance by according to builder's information.
      *
      * @return
-     * @throws URISyntaxException
      */
-    public URI build() throws URISyntaxException {
+    public URI build() {
         StringBuilder uriStringBuilder = new StringBuilder();
 
         boolean shouldAppendTrailingSlash = false;
@@ -388,6 +383,6 @@ public class URIBuilderTiny {
             uriString = scheme + glue + uriString;
         }
 
-        return new URI(uriString);
+        return URI.create(uriString);
     }
 }

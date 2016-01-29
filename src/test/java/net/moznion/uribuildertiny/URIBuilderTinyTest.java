@@ -3,7 +3,6 @@ package net.moznion.uribuildertiny;
 import org.junit.Test;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class URIBuilderTinyTest {
     @Test
-    public void shouldGetURIInstanceByManual() throws URISyntaxException {
+    public void shouldGetURIInstanceByManual() {
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put("hoge", "fuga");
 
@@ -33,7 +32,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldGetURIInstanceByStringInitialValue() throws URISyntaxException {
+    public void shouldGetURIInstanceByStringInitialValue() {
         URI got = new URIBuilderTiny("https://java.example.com/foo/bar")
                 .setPort(8080)
                 .appendPaths(Arrays.asList("buz", "qux"))
@@ -46,8 +45,8 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldGetURIInstanceByURIInitialValue() throws URISyntaxException {
-        URI got = new URIBuilderTiny(new URI("https://java.example.com/foo/bar"))
+    public void shouldGetURIInstanceByURIInitialValue() {
+        URI got = new URIBuilderTiny(URI.create("https://java.example.com/foo/bar"))
                 .setPort(8080)
                 .appendPaths(Arrays.asList("buz", "qux"))
                 .addQueryParameter("hoge", "fuga")
@@ -59,11 +58,11 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldGetURIInstanceWithEmptyURI() throws URISyntaxException {
+    public void shouldGetURIInstanceWithEmptyURI() {
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put("hoge", "fuga");
 
-        URI got = new URIBuilderTiny(new URI(""))
+        URI got = new URIBuilderTiny(URI.create(""))
                 .setScheme("https")
                 .setHost("java.example.com")
                 .setPort(8080)
@@ -78,7 +77,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testSetByStringy() throws URISyntaxException {
+    public void testSetByStringy() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com")
@@ -90,7 +89,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testEmptyPort() throws URISyntaxException {
+    public void testEmptyPort() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com")
@@ -99,7 +98,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testSetAndAddQueryParamWithStringPair() throws URISyntaxException {
+    public void testSetAndAddQueryParamWithStringPair() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com")
@@ -110,7 +109,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testSetAndAddQueryParamsWithMap() throws URISyntaxException {
+    public void testSetAndAddQueryParamsWithMap() {
         Map<String, String> initQueryParameters = new HashMap<>();
         initQueryParameters.put("hoge", "fuga");
 
@@ -127,7 +126,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testForTrailingSlash() throws URISyntaxException {
+    public void testForTrailingSlash() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com/")
@@ -137,7 +136,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testForTrailingSlashWithPaths() throws URISyntaxException {
+    public void testForTrailingSlashWithPaths() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com/")
@@ -148,13 +147,13 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testEmpty() throws URISyntaxException {
+    public void testEmpty() {
         URI got = new URIBuilderTiny("").build();
         assertEquals("", got.toString());
     }
 
     @Test
-    public void testForQueryStringOfInitValue() throws URISyntaxException {
+    public void testForQueryStringOfInitValue() {
         URI got = new URIBuilderTiny("http://java.example.com?foo=bar&buz=qux")
                 .setPort(8080)
                 .build();
@@ -162,7 +161,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testForAmbiguousQueryStringOfInitValue() throws URISyntaxException {
+    public void testForAmbiguousQueryStringOfInitValue() {
         URI got = new URIBuilderTiny("http://java.example.com?foo&buz=qux")
                 .setPort(8080)
                 .build();
@@ -170,72 +169,72 @@ public class URIBuilderTinyTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoConstructorByString() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoConstructorByString() {
         new URIBuilderTiny((String) null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoConstructorByURI() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoConstructorByURI() {
         new URIBuilderTiny((URI) null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoSetScheme() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoSetScheme() {
         new URIBuilderTiny().setScheme(null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoSetHost() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoSetHost() {
         new URIBuilderTiny().setHost(null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoSetPaths() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoSetPaths() {
         new URIBuilderTiny().setPaths((List<Object>) null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoAppendPaths() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoAppendPaths() {
         new URIBuilderTiny().appendPaths((List<String>) null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoSetQueryParameters() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoSetQueryParameters() {
         new URIBuilderTiny().setQueryParameters(null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoSetQueryParameterOfKey() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoSetQueryParameterOfKey() {
         new URIBuilderTiny().setQueryParameter(null, "value");
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoSetQueryParameterOfValue() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoSetQueryParameterOfValue() {
         new URIBuilderTiny().setQueryParameter("key", null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoAddQueryParameters() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoAddQueryParameters() {
         new URIBuilderTiny().addQueryParameters(null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoAddQueryParameterOfKey() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoAddQueryParameterOfKey() {
         new URIBuilderTiny().addQueryParameter(null, "value");
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoAddQueryParameterOfValue() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoAddQueryParameterOfValue() {
         new URIBuilderTiny().addQueryParameter("key", null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoSetFragment() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoSetFragment() {
         new URIBuilderTiny().setFragment(null);
     }
 
     @Test
-    public void testToOverwritePath() throws URISyntaxException {
+    public void testToOverwritePath() {
         URI got = new URIBuilderTiny()
                 .setScheme("https")
                 .setHost("java.example.com")
@@ -246,7 +245,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testToOverwriteQueryParam() throws URISyntaxException {
+    public void testToOverwriteQueryParam() {
         URI got = new URIBuilderTiny()
                 .setScheme("https")
                 .setHost("java.example.com")
@@ -257,7 +256,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testToOverwriteQueryParams() throws URISyntaxException {
+    public void testToOverwriteQueryParams() {
         Map<String, String> oldParam = new HashMap<>();
         oldParam.put("foo", "bar");
         Map<String, String> newParam = new HashMap<>();
@@ -273,7 +272,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testForGetters() throws URISyntaxException {
+    public void testForGetters() {
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put("hoge", "fuga");
 
@@ -300,7 +299,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testForVarargSetPaths() throws URISyntaxException {
+    public void testForVarargSetPaths() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com")
@@ -311,12 +310,12 @@ public class URIBuilderTinyTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoVarargSetPaths() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoVarargSetPaths() {
         new URIBuilderTiny().setPaths((String[]) null);
     }
 
     @Test
-    public void testForVarargAppendPaths() throws URISyntaxException {
+    public void testForVarargAppendPaths() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com")
@@ -328,12 +327,12 @@ public class URIBuilderTinyTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldNPEWhenPassNullIntoVarargAppendPaths() throws URISyntaxException {
+    public void shouldNPEWhenPassNullIntoVarargAppendPaths() {
         new URIBuilderTiny().appendPaths((String[]) null);
     }
 
     @Test
-    public void testForSettingAndAppendingPathsByString() throws URISyntaxException {
+    public void testForSettingAndAppendingPathsByString() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com")
@@ -345,7 +344,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void testForSchemeAndPathsCase() throws URISyntaxException {
+    public void testForSchemeAndPathsCase() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .appendPaths("foo", "bar")
@@ -354,7 +353,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldSetPathsEvenIfAnyTypeByList() throws URISyntaxException {
+    public void shouldSetPathsEvenIfAnyTypeByList() {
         URI got = new URIBuilderTiny()
                 .setScheme("https")
                 .setHost("java.example.com")
@@ -364,7 +363,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldSetPathsEvenIfAnyTypeByVararg() throws URISyntaxException {
+    public void shouldSetPathsEvenIfAnyTypeByVararg() {
         URI got = new URIBuilderTiny()
                 .setScheme("https")
                 .setHost("java.example.com")
@@ -374,7 +373,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldAppendPathsEvenIfAnyTypeByList() throws URISyntaxException {
+    public void shouldAppendPathsEvenIfAnyTypeByList() {
         URI got = new URIBuilderTiny()
                 .setScheme("https")
                 .setHost("java.example.com")
@@ -384,7 +383,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldAppendPathsEvenIfAnyTypeByVararg() throws URISyntaxException {
+    public void shouldAppendPathsEvenIfAnyTypeByVararg() {
         URI got = new URIBuilderTiny()
                 .setScheme("https")
                 .setHost("java.example.com")
@@ -394,7 +393,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldSetQueryParamEvenIfAnyTypeByMap() throws URISyntaxException {
+    public void shouldSetQueryParamEvenIfAnyTypeByMap() {
         Map<String, Object> queryParameters = new HashMap<>();
         queryParameters.put("hoge", "fuga");
         queryParameters.put("piyo", 1);
@@ -408,7 +407,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldSetQueryParamEvenIfAnyType() throws URISyntaxException {
+    public void shouldSetQueryParamEvenIfAnyType() {
         URI got = new URIBuilderTiny("http://example.com")
                 .setQueryParameter("foo", new Foo("foo"))
                 .build();
@@ -417,7 +416,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldAddQueryParamEvenIfAnyTypeByMap() throws URISyntaxException {
+    public void shouldAddQueryParamEvenIfAnyTypeByMap() {
         Map<String, Object> queryParameters = new HashMap<>();
         queryParameters.put("hoge", "fuga");
         queryParameters.put("piyo", 1);
@@ -431,7 +430,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldAddQueryParamEvenIfAnyType() throws URISyntaxException {
+    public void shouldAddQueryParamEvenIfAnyType() {
         Map<String, Object> queryParameters = new HashMap<>();
 
         URI got = new URIBuilderTiny("http://example.com")
@@ -444,7 +443,7 @@ public class URIBuilderTinyTest {
     }
 
     @Test
-    public void shouldApplyURIEncode() throws URISyntaxException {
+    public void shouldApplyURIEncode() {
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put("h%oge", "f%uga");
 
@@ -462,7 +461,8 @@ public class URIBuilderTinyTest {
                 got.toString());
     }
 
-    public void testForRemovingTrailingSlash() throws URISyntaxException {
+    @Test
+    public void testForRemovingTrailingSlash() {
         URI got = new URIBuilderTiny()
                 .setScheme("http")
                 .setHost("java.example.com/")

@@ -1,7 +1,6 @@
 package net.moznion.uribuildertiny;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * Provider of {@link URIBuilderTiny} with base URI.
@@ -31,9 +30,8 @@ public class URIBuilderTinyProviderWithBase {
      * Provide an instance of {@link URIBuilderTiny}.
      *
      * @return an instance of {@link URIBuilderTiny}
-     * @throws URISyntaxException
      */
-    public URIBuilderTiny getBuilder() throws URISyntaxException {
+    public URIBuilderTiny getBuilder() {
         return new URIBuilderTiny(baseUriString);
     }
 }
