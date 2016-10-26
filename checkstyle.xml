@@ -87,7 +87,7 @@
 
     <module name="ImportOrder">
       <property name="severity" value="warning"/>
-      <property name="groups" value="junit,lombok,com,edu,net,org,java,javax"/>
+      <property name="groups" value="junit,com,edu,net,org,java,javax,lombok"/>
       <property name="option" value="top"/>
       <property name="tokens" value="STATIC_IMPORT, IMPORT"/>
     </module>
