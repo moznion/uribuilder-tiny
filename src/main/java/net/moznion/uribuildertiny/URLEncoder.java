@@ -1,27 +1,21 @@
 package net.moznion.uribuildertiny;
 
-import lombok.NonNull;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class URLEncoder {
-    private final String encodingCharsetName;
+import lombok.NonNull;
 
-    public URLEncoder(Charset encodingCharset) {
-        this.encodingCharsetName = encodingCharset.name();
+class URLEncoder {
+    private final EntityURLEncoder entityURLEncoder;
+
+    URLEncoder(final EntityURLEncoder entityURLEncoder) {
+        this.entityURLEncoder = entityURLEncoder;
     }
 
     public String encode(@NonNull Object input) {
-        try {
-            return java.net.URLEncoder.encode(input.toString(), encodingCharsetName);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        return entityURLEncoder.encode(input);
     }
 
     public List<String> encode(@NonNull List<?> input) {

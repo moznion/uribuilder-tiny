@@ -1,15 +1,15 @@
 package net.moznion.uribuildertiny;
 
-import org.junit.Test;
-
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 
+import org.junit.Test;
+
 public class URLEncoderTest {
     @Test(expected = RuntimeException.class)
     public void shouldRaiseExceptionWhenInvalidEncodingIsGiven() {
-        new URLEncoder(new InvalidCharset("invalid", new String[]{"inv"}))
+        new URLEncoder(new ConcreteEntityURLEncoder(new InvalidCharset("invalid", new String[] { "inv" })))
                 .encode("foo");
     }
 
@@ -19,7 +19,7 @@ public class URLEncoderTest {
          * set.
          *
          * @param canonicalName The canonical name of this charset
-         * @param aliases       An array of this charset's aliases, or null if it has no aliases
+         * @param aliases An array of this charset's aliases, or null if it has no aliases
          */
         protected InvalidCharset(String canonicalName, String[] aliases) {
             super(canonicalName, aliases);
