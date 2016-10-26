@@ -13,39 +13,54 @@ Map<String, String> queryParameters = new HashMap<>();
 queryParameters.put("hoge", "fuga");
 
 new URIBuilderTiny()
-	.setScheme("https")
-	.setHost("java.example.com")
-	.setPort(8080)
-	.setPaths("foo", "bar")
-	.appendPaths("buz", "qux")
-	.setQueryParameters(queryParameters)
-	.addQueryParameter("piyo", "hogera")
-	.setFragment("frag")
-	.build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
+    .setScheme("https")
+    .setHost("java.example.com")
+    .setPort(8080)
+    .setPaths("foo", "bar")
+    .appendPaths("buz", "qux")
+    .setQueryParameters(queryParameters)
+    .addQueryParameter("piyo", "hogera")
+    .setFragment("frag")
+    .build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
 ```
 
 ### With URI string as initial value
 
 ```java
 new URIBuilderTiny("https://java.example.com/foo/bar")
-	.setPort(8080)
-	.appendPaths("buz", "qux")
-	.addQueryParameter("hoge", "fuga")
-	.addQueryParameter("piyo", "hogera")
-	.setFragment("frag")
-	.build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
+    .setPort(8080)
+    .appendPaths("buz", "qux")
+    .addQueryParameter("hoge", "fuga")
+    .addQueryParameter("piyo", "hogera")
+    .setFragment("frag")
+    .build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
 ```
 
 ### With URI instance as initial value
 
 ```java
 new URIBuilderTiny(new URI("https://java.example.com/foo/bar"))
-	.setPort(8080)
-	.appendPathsByString("/buz/qux")
-	.addQueryParameter("hoge", "fuga")
-	.addQueryParameter("piyo", "hogera")
-	.setFragment("frag")
-	.build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
+    .setPort(8080)
+    .appendPathsByString("/buz/qux")
+    .addQueryParameter("hoge", "fuga")
+    .addQueryParameter("piyo", "hogera")
+    .setFragment("frag")
+    .build(); // => same as `new URI(https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag)`
+```
+
+### Raw mode (not apply URL encode)
+
+```java
+new URIBuilderTiny()
+    .setScheme("http")
+    .setRawHost("h&ost.example.com")
+    .setPort(8080)
+    .setRawPaths(Arrays.asList("b&uz", "q&ux"))
+    .appendRawPaths(Arrays.asList("f&oobar", "b&uzqux"))
+    .setRawQueryParameter("h&oge", "f&uga")
+    .addRawQueryParameter("p&iyo", "p&iyopiyo")
+    .setRawFragment("f&rag")
+    .build(); // => same as `http://h&ost.example.com:8080/b&uz/q&ux/f&oobar/b&uzqux?h&oge=f&uga&p&iyo=p&iyopiyo#f&rag`
 ```
 
 Description
