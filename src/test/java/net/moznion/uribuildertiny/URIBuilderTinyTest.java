@@ -1,6 +1,6 @@
 package net.moznion.uribuildertiny;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class URIBuilderTinyTest {
     @Test
@@ -28,7 +28,7 @@ public class URIBuilderTinyTest {
                 .setFragment("frag")
                 .build();
         assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag",
-                got.toString());
+                     got.toString());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class URIBuilderTinyTest {
                 .setFragment("frag")
                 .build();
         assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag",
-                got.toString());
+                     got.toString());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class URIBuilderTinyTest {
                 .setFragment("frag")
                 .build();
         assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag",
-                got.toString());
+                     got.toString());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class URIBuilderTinyTest {
                 .setFragment("frag")
                 .build();
         assertEquals("https://java.example.com:8080/foo/bar/buz/qux?hoge=fuga&piyo=hogera#frag",
-                got.toString());
+                     got.toString());
     }
 
     @Test
@@ -403,7 +403,7 @@ public class URIBuilderTinyTest {
                 .setQueryParameters(queryParameters)
                 .build();
         assertEquals("http://example.com?foo=foo&hoge=fuga&piyo=1",
-                got.toString());
+                     got.toString());
     }
 
     @Test
@@ -412,7 +412,7 @@ public class URIBuilderTinyTest {
                 .setQueryParameter("foo", new Foo("foo"))
                 .build();
         assertEquals("http://example.com?foo=foo",
-                got.toString());
+                     got.toString());
     }
 
     @Test
@@ -426,7 +426,7 @@ public class URIBuilderTinyTest {
                 .addQueryParameters(queryParameters)
                 .build();
         assertEquals("http://example.com?foo=foo&hoge=fuga&piyo=1",
-                got.toString());
+                     got.toString());
     }
 
     @Test
@@ -439,7 +439,7 @@ public class URIBuilderTinyTest {
                 .addQueryParameter("foo", new Foo("foo"))
                 .build();
         assertEquals("http://example.com?foo=foo&hoge=fuga&piyo=1",
-                got.toString());
+                     got.toString());
     }
 
     @Test
@@ -457,7 +457,8 @@ public class URIBuilderTinyTest {
                 .addQueryParameter("p%iyo", "h%ogera")
                 .setFragment("f%rag")
                 .build();
-        assertEquals("https://java.e%25xample.com:8080/f%25oo/b%25ar/b%25uz/q%25ux?h%25oge=f%25uga&p%25iyo=h%25ogera#f%25rag",
+        assertEquals(
+                "https://java.e%25xample.com:8080/f%25oo/b%25ar/b%25uz/q%25ux?h%25oge=f%25uga&p%25iyo=h%25ogera#f%25rag",
                 got.toString());
     }
 
@@ -470,6 +471,57 @@ public class URIBuilderTinyTest {
                 .forceRemoveTrailingSlash(true)
                 .build();
         assertEquals("http://java.example.com:8080", got.toString());
+    }
+
+    @Test
+    public void testSetRawEntities() {
+        URI got = new URIBuilderTiny()
+                .setScheme("http")
+                .setRawHost("h&ost.example.com")
+                .setPort(8080)
+                .setRawPaths(Arrays.asList("b&uz", "q&ux"))
+                .appendRawPaths(Arrays.asList("f&oobar", "b&uzqux"))
+                .setRawQueryParameter("h&oge", "f&uga")
+                .addRawQueryParameter("p&iyo", "p&iyopiyo")
+                .setRawFragment("f&rag")
+                .build();
+        assertEquals(
+                "http://h&ost.example.com:8080/b&uz/q&ux/f&oobar/b&uzqux?h&oge=f&uga&p&iyo=p&iyopiyo#f&rag",
+                got.toString());
+
+        Map<String, String> queryParameters = new HashMap<>();
+        queryParameters.put("h&oge", "f&uga");
+        queryParameters.put("p&iyo", "p&iyopiyo");
+
+        got = new URIBuilderTiny()
+                .setScheme("http")
+                .setRawHost("h&ost.example.com")
+                .setPort(8080)
+                .setRawPaths("b&uz", "q&ux")
+                .appendRawPaths("f&oobar", "b&uzqux")
+                .setRawQueryParameters(queryParameters)
+                .setRawFragment("f&rag")
+                .build();
+        assertEquals(
+                "http://h&ost.example.com:8080/b&uz/q&ux/f&oobar/b&uzqux?h&oge=f&uga&p&iyo=p&iyopiyo#f&rag",
+                got.toString());
+
+        queryParameters = new HashMap<>();
+        queryParameters.put("p&iyo", "p&iyopiyo");
+
+        got = new URIBuilderTiny()
+                .setScheme("http")
+                .setRawHost("h&ost.example.com")
+                .setPort(8080)
+                .setRawPathsByString("/b&uz/q&ux")
+                .appendRawPathsByString("/f&oobar/b&uzqux")
+                .addRawQueryParameter("h&oge", "f&uga")
+                .addRawQueryParameters(queryParameters)
+                .setRawFragment("f&rag")
+                .build();
+        assertEquals(
+                "http://h&ost.example.com:8080/b&uz/q&ux/f&oobar/b&uzqux?h&oge=f&uga&p&iyo=p&iyopiyo#f&rag",
+                got.toString());
     }
 
     private static class Foo {
