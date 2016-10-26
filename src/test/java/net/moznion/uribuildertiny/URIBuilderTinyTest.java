@@ -524,6 +524,16 @@ public class URIBuilderTinyTest {
                 got.toString());
     }
 
+    @Test
+    public void allowConsecutiveSlashAtQueryParameter() throws Exception {
+        URI got = new URIBuilderTiny()
+                .setScheme("http")
+                .setHost("example.com")
+                .setQueryParameter("url", "https://example.com")
+                .build();
+        assertEquals("http://example.com?url=https%3A%2F%2Fexample.com", got.toString());
+    }
+
     private static class Foo {
         private String foo;
 

@@ -412,7 +412,7 @@ public class URIBuilderTiny {
      * Build a new URI instance by according to builder's information.
      */
     public URI build() {
-        StringBuilder uriStringBuilder = new StringBuilder();
+        final StringBuilder baseURIStringBuilder = new StringBuilder();
 
         boolean shouldAppendTrailingSlash = false;
         if (!host.isEmpty()) {
@@ -420,46 +420,50 @@ public class URIBuilderTiny {
                 shouldAppendTrailingSlash = !forceRemoveTrailingSlash;
                 host = host.substring(0, host.length() - 1);
             }
-            uriStringBuilder.append(host);
+            baseURIStringBuilder.append(host);
         }
 
         if (port >= 0) {
-            uriStringBuilder.append(":").append(port);
+            baseURIStringBuilder.append(":").append(port);
         }
 
         if (!paths.isEmpty()) {
             for (String path : paths) {
                 if (!path.isEmpty()) {
-                    uriStringBuilder.append("/").append(path);
+                    baseURIStringBuilder.append("/").append(path);
                 }
             }
         }
 
         if (shouldAppendTrailingSlash) {
-            uriStringBuilder.append("/");
+            baseURIStringBuilder.append("/");
         }
 
+        String uriString = baseURIStringBuilder.toString();
+        uriString = CONSECUTIVE_SLASHES_RE.matcher(uriString).replaceAll("/"); // Squash consecutive
+
+        final StringBuilder queryAndFragmentStringBuilder = new StringBuilder();
         if (!queryParameters.isEmpty()) {
-            uriStringBuilder.append("?");
+            queryAndFragmentStringBuilder.append("?");
 
             int i = 1;
             final int size = queryParameters.size();
             for (Entry<String, String> queryParameter : queryParameters.entrySet()) {
-                uriStringBuilder.append(queryParameter.getKey()).append("=").append(queryParameter.getValue());
+                queryAndFragmentStringBuilder.append(queryParameter.getKey()).append("=").append(
+                        queryParameter.getValue());
                 if (i != size) {
-                    uriStringBuilder.append("&");
+                    queryAndFragmentStringBuilder.append("&");
                 }
                 i++;
             }
         }
 
         if (!fragment.isEmpty()) {
-            uriStringBuilder.append("#").append(fragment);
+            queryAndFragmentStringBuilder.append("#").append(fragment);
         }
 
-        String uriString = uriStringBuilder.toString();
+        uriString += queryAndFragmentStringBuilder.toString();
 
-        uriString = CONSECUTIVE_SLASHES_RE.matcher(uriString).replaceAll("/"); // Squash consecutive
         // slashes
         if (!scheme.isEmpty()) {
             String glue = "://";
