@@ -34,7 +34,10 @@ java {
 }
 
 tasks.build {
-    dependsOn("spotlessApply")
+    val currentJdkVersion = System.getProperty("java.version").split(".")[0].toInt()
+    if (currentJdkVersion >= 11) {
+        dependsOn("spotlessApply")
+    }
 }
 
 tasks.withType<Test> {
