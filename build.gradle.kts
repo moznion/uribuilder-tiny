@@ -2,6 +2,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
+    id("com.diffplug.spotless") version "6.23.3"
 }
 
 repositories {
@@ -32,8 +33,23 @@ java {
     withSourcesJar()
 }
 
+tasks.build {
+    dependsOn("spotlessApply")
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+spotless {
+    java {
+        importOrder()
+        target("**/*.java")
+    }
+
+    format("kts") {
+        target("**/*.kts")
+    }
 }
 
 publishing {

@@ -1,10 +1,9 @@
 package net.moznion.uribuildertiny;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class URIBuilderTinyProviderWithBaseTest {
     @Test

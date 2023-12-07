@@ -2,7 +2,6 @@ package net.moznion.uribuildertiny;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-
 import lombok.NonNull;
 
 class ConcreteEntityURLEncoder implements EntityURLEncoder {
