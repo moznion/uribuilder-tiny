@@ -18,10 +18,10 @@ buildscript {
 val lombokVersion = "1.18.30"
 
 dependencies {
-    compileOnly("org.projectlombok:lombok:${lombokVersion}")
-    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
-    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    testCompileOnly("org.projectlombok:lombok:$lombokVersion")
+    testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 }
@@ -43,12 +43,15 @@ tasks.withType<Test> {
 
 spotless {
     java {
-        importOrder()
         target("**/*.java")
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat("1.18.1")
     }
 
-    format("kts") {
-        target("**/*.kts")
+    kotlinGradle {
+        target("*.kts")
+        ktlint()
     }
 }
 
@@ -90,14 +93,18 @@ publishing {
             val snapshotsRepoUrl: String = "https://oss.sonatype.org/content/repositories/snapshots"
             setUrl(uri(if ((version as String).endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl))
             credentials {
-                username = fun (): String {
-                    val sonatypeUsername = findProperty("sonatypeUsername") ?: return ""
-                    return sonatypeUsername as String
-                }()
-                password = fun (): String {
-                    val sonatypePassword = findProperty("sonatypePassword") ?: return ""
-                    return sonatypePassword as String
-                }()
+                username =
+
+                    fun (): String {
+                        val sonatypeUsername = findProperty("sonatypeUsername") ?: return ""
+                        return sonatypeUsername as String
+                    }()
+                password =
+
+                    fun (): String {
+                        val sonatypePassword = findProperty("sonatypePassword") ?: return ""
+                        return sonatypePassword as String
+                    }()
             }
         }
     }
@@ -106,4 +113,3 @@ publishing {
 signing {
     sign(publishing.publications["maven"])
 }
-
