@@ -15,5 +15,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-      - run: ./mvnw test
+      - run: ./gradlew check
 
