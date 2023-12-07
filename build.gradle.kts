@@ -14,11 +14,13 @@ buildscript {
     }
 }
 
+val lombokVersion = "1.18.30"
+
 dependencies {
-    compileOnly("org.projectlombok:lombok:1.18.16")
-    annotationProcessor("org.projectlombok:lombok:1.18.16")
-    testCompileOnly("org.projectlombok:lombok:1.18.16")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.16")
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
     testImplementation("junit:junit:4.13.1")
 }
