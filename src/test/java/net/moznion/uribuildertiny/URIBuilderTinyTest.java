@@ -1,6 +1,6 @@
 package net.moznion.uribuildertiny;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class URIBuilderTinyTest {
     @Test
@@ -168,69 +169,71 @@ public class URIBuilderTinyTest {
         assertEquals("http://java.example.com:8080?buz=qux", got.toString());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoConstructorByString() {
-        new URIBuilderTiny((String) null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny((String) null));
+
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoConstructorByURI() {
-        new URIBuilderTiny((URI) null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny((URI) null));
+
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoSetScheme() {
-        new URIBuilderTiny().setScheme(null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().setScheme(null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoSetHost() {
-        new URIBuilderTiny().setHost(null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().setHost(null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoSetPaths() {
-        new URIBuilderTiny().setPaths((List<Object>) null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().setPaths((List<Object>) null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoAppendPaths() {
-        new URIBuilderTiny().appendPaths((List<String>) null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().appendPaths((List<String>) null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoSetQueryParameters() {
-        new URIBuilderTiny().setQueryParameters(null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().setQueryParameters(null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoSetQueryParameterOfKey() {
-        new URIBuilderTiny().setQueryParameter(null, "value");
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().setQueryParameter(null, "value"));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoSetQueryParameterOfValue() {
-        new URIBuilderTiny().setQueryParameter("key", null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().setQueryParameter("key", null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoAddQueryParameters() {
-        new URIBuilderTiny().addQueryParameters(null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().addQueryParameters(null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoAddQueryParameterOfKey() {
-        new URIBuilderTiny().addQueryParameter(null, "value");
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().addQueryParameter(null, "value"));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoAddQueryParameterOfValue() {
-        new URIBuilderTiny().addQueryParameter("key", null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().addQueryParameter("key", null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoSetFragment() {
-        new URIBuilderTiny().setFragment(null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().setFragment(null));
     }
 
     @Test
@@ -309,9 +312,9 @@ public class URIBuilderTinyTest {
         assertEquals("http://java.example.com:8080/foo/bar", got.toString());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoVarargSetPaths() {
-        new URIBuilderTiny().setPaths((Object[]) null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().setPaths((Object[]) null));
     }
 
     @Test
@@ -326,9 +329,9 @@ public class URIBuilderTinyTest {
         assertEquals("http://java.example.com:8080/foo/bar/qux/quux", got.toString());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void shouldNPEWhenPassNullIntoVarargAppendPaths() {
-        new URIBuilderTiny().appendPaths((Object[]) null);
+        assertThrows(NullPointerException.class, () -> new URIBuilderTiny().appendPaths((Object[]) null));
     }
 
     @Test
