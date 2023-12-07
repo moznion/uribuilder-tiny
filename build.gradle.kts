@@ -2,6 +2,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
+    id("com.diffplug.spotless") version "6.23.3"
 }
 
 repositories {
@@ -17,10 +18,10 @@ buildscript {
 val lombokVersion = "1.18.30"
 
 dependencies {
-    compileOnly("org.projectlombok:lombok:${lombokVersion}")
-    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
-    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    testCompileOnly("org.projectlombok:lombok:$lombokVersion")
+    testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 }
@@ -34,6 +35,20 @@ java {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+spotless {
+    java {
+        target("**/*.java")
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat("1.18.1")
+    }
+
+    kotlinGradle {
+        target("*.kts")
+        ktlint()
+    }
 }
 
 publishing {
@@ -74,14 +89,18 @@ publishing {
             val snapshotsRepoUrl: String = "https://oss.sonatype.org/content/repositories/snapshots"
             setUrl(uri(if ((version as String).endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl))
             credentials {
-                username = fun (): String {
-                    val sonatypeUsername = findProperty("sonatypeUsername") ?: return ""
-                    return sonatypeUsername as String
-                }()
-                password = fun (): String {
-                    val sonatypePassword = findProperty("sonatypePassword") ?: return ""
-                    return sonatypePassword as String
-                }()
+                username =
+
+                    fun (): String {
+                        val sonatypeUsername = findProperty("sonatypeUsername") ?: return ""
+                        return sonatypeUsername as String
+                    }()
+                password =
+
+                    fun (): String {
+                        val sonatypePassword = findProperty("sonatypePassword") ?: return ""
+                        return sonatypePassword as String
+                    }()
             }
         }
     }
@@ -90,4 +109,3 @@ publishing {
 signing {
     sign(publishing.publications["maven"])
 }
-
