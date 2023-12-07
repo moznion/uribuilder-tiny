@@ -311,7 +311,7 @@ public class URIBuilderTinyTest {
 
     @Test(expected = NullPointerException.class)
     public void shouldNPEWhenPassNullIntoVarargSetPaths() {
-        new URIBuilderTiny().setPaths((String[]) null);
+        new URIBuilderTiny().setPaths((Object[]) null);
     }
 
     @Test
@@ -328,7 +328,7 @@ public class URIBuilderTinyTest {
 
     @Test(expected = NullPointerException.class)
     public void shouldNPEWhenPassNullIntoVarargAppendPaths() {
-        new URIBuilderTiny().appendPaths((String[]) null);
+        new URIBuilderTiny().appendPaths((Object[]) null);
     }
 
     @Test
