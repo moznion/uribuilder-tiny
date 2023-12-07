@@ -16,5 +16,11 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
+      - name: Remove Spotless configuration if the runtime is JDK 8 because Spotless dropped the JDK 8 support
+        if: ${{ matrix.java == 8 }}
+        run: |
+          perl -0777 -pe 's/spotless\s*\{[^{}]*(\{[^{}]*\}[^{}]*)*\}//sg' build.gradle.kts > build.gradle.kts.tmp
+          sed -i'' -e's/.*id("com.diffplug.spotless").*//' build.gradle.kts.tmp
+          mv build.gradle.kts.tmp build.gradle.kts
       - run: ./gradlew check
 

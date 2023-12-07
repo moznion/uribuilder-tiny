@@ -33,13 +33,6 @@ java {
     withSourcesJar()
 }
 
-tasks.build {
-    val currentJdkVersion = System.getProperty("java.version").split(".")[0].toInt()
-    if (currentJdkVersion >= 11) {
-        dependsOn("spotlessApply")
-    }
-}
-
 tasks.withType<Test> {
     useJUnitPlatform()
 }
